@@ -1,8 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="wrapper">
+    <div class="hero">
+        <h1 class="hero-title">Укажите маршрут</h1>
+        <p class="hero-subtitle">и дату поездки</p>
+        <div class="in date">
+            <input type="date" id="date" name="date" placeholder="Дата">
+        </div>
+        <div class="in city">
+            <div class="from">
+                <input type="text" id="cityFrom" name="cityFrom" placeholder="Город отправления">
+            </div>
+            <img src="~/images/Arrow1.png" alt="" class="arrow">
+            <div class="to">
+                <input type="text" id="cityTo" name="cityTo" placeholder="Город прибытия">
+            </div>
+        </div>
+        <li class="show-offers"><a href=""><img class="trainBut" src="~/images/train.png" alt="">Показать предложения</a></li>
+        <div class="trainImgs">
+            <div class="trainRed-container">
+                <img class="trainRed" src="~/images/trainRed.png" alt="">
+                <div class="train-light left"></div> <!-- Левая фара -->
+                <div class="train-light right"></div> <!-- Правая фара -->
+            </div>
+            <img class="trainGray" src="~/images/trainGray.png" alt="">
+        </div>                     
+    </div>
+</div>    
