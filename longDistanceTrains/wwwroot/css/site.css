@@ -1,22 +1,283 @@
-html {
-  font-size: 14px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&display=swap');
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+*{
+  margin: 0;
+  padding: 0%;
 }
 
 body {
-  margin-bottom: 60px;
+  font-family: "Montserrat";
+  font-weight: 400;
+  color: #fff;
+  background: #000; /* Black background */
+  padding: 0;
+  margin: 0;
 }
+
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+
+/* Обновлённый стиль для header */
+header {
+  position: fixed; /* Фиксированное позиционирование */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 25px;
+  background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+  backdrop-filter: blur(10px); /* Размытие заднего фона */
+  -webkit-backdrop-filter: blur(10px); /* Для поддержки в Safari */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+  z-index: 1000; /* Высокий z-index для поверхностного расположения */
+}
+
+header nav{
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-left: 25px;
+  margin-right: 70px;
+  vertical-align: middle;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-left: 25px;
+  margin-right: 70px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+header nav ul li{
+  cursor: pointer;
+  margin-left: 0;
+  margin-right: 0;
+  transition: all 200ms ease;
+}
+
+header nav .right li:hover{
+  -webkit-filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+}
+
+.logo{
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.redlogo{
+  color: #FF0000;
+}
+
+.jd{
+  margin-left: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+
+.wrapper {
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,1) 100%),
+  url(~/images/trainTexture.jpg) no-repeat center center fixed;
+  background-color: #000;
+  background-size: cover;
+  max-width: 100%;
+  padding-top: 80px; /* Добавьте отступ, соответствующий высоте header */
+  overflow-x: hidden;
+}
+
+
+.hero {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column; /* Элементы будут располагаться вертикально */
+  justify-content: center; /* Центрирование по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+
+}
+
+.hero {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+label {
+  display: block;
+  margin: 10px 0px 5px;
+  min-width: 170px;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 17em;
+  height: 4em;
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 15px;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 600;
+  color: #000000;
+  appearance: none;
+  transition: all 200ms ease;
+  box-sizing: border-box; /* Учитываем padding и border в ширине */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  outline: none; /* Убираем стандартное выделение */
+  border: 1px solid rgba(255, 0, 0, 0.554); /* Красная обводка при выборе */
+}
+
+.in.city {
+  display: flex;
+  align-items: center; /* Выравнивание по вертикали */
+  gap: 10px; /* Расстояние между элементами */
+}
+
+.from,
+.to {
+  flex: 1; /* Равномерное распределение ширины */
+}
+
+input[type="date"] {
+  width: 6.8em;
+  position: relative;
+  top: 2em;
+}
+
+.show-offers {
+  background: linear-gradient(123deg, rgba(255,3,96,1) 0%, rgba(244,30,51,1) 52%, rgba(146,4,6,1) 100%);
+  border: none;
+  font-size: 24px;
+  width: 19em;
+  height: 4em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex; /* Включаем Flexbox */
+  align-items: center; /* Центрирование по вертикали */
+  justify-content: space-between; /* Центрирование по горизонтали */
+}
+
+.show-offers:hover {
+  filter: brightness(0.8); /* Затемнение кнопки при наведении */
+}
+
+.show-offers a {
+  display: flex;
+  align-items: center; /* Центрирование по вертикали */
+  gap: 1em; /* Расстояние между иконкой и текстом */
+  color: #fff;
+  text-decoration: none; /* Убираем подчёркивание у ссылки */
+  font-weight: 600;
+}
+
+.trainBut {
+  width: 4.5em;
+  height: 4.5em;
+}
+
+.trainImgs{
+  display: flex;
+  margin-top: 40px;
+}
+
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px; /* Отступ до подзаголовка */
+}
+
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7); /* Более светлый цвет для контраста */
+  text-align: center;
+  margin-bottom: 20px; /* Отступ до формы ввода */
+}
+
+.trainRed-container {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* Общий стиль для фар */
+.train-light {
+  position: absolute;
+  width: 15px; /* Размер источника света */
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.8); /* Белый цвет с небольшой прозрачностью */
+  border-radius: 50%; /* Круглая форма фары */
+  box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.5); /* Эффект свечения */
+  animation: blink 1.5s infinite; /* Анимация моргания */
+}
+
+/* Позиция левой фары */
+.train-light.left {
+  top: 60%; /* Подогнать под положение фар на поезде */
+  left: 59%; /* Расположение относительно поезда */
+}
+
+/* Позиция правой фары */
+.train-light.right {
+  top: 59%; /* Подогнать под положение фар на поезде */
+  right: 31%; /* Расположение относительно поезда */
+}
+
+/* Эффект рассеянного света */
+.train-light::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px; /* Ширина рассеянного света */
+  height: 150px; /* Высота рассеянного света */
+  background: radial-gradient(
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0.1),
+          transparent
+  );
+  border-radius: 50%; /* Круглая форма света */
+  opacity: 0.8;
+  z-index: -1; /* Свет позади фары */
+}
+
+/* Анимация моргания */
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.5;
+  }
+}
+
