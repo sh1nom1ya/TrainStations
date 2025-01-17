@@ -18,22 +18,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="half right">
-                    <li class="vid">
-                        @{
-                            if (User.Identity.IsAuthenticated)
-                            {
-                                <a asp-area="Identity" asp-page="/Account/Manage/Index" id="profile">
-                                    <img src="КАРТИНКА" alt="Профиль">
-                                </a>
-                            }
-                            else
-                            {
-                                <a asp-area="Identity" asp-page="/Account/Login" id="login" >
-                                    <img src="КАРТИНКА" alt="Логин">
-                                </a>
-                            }
-                        }
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <partial name="_LoginPartial" />
                     </li>
                 </ul>
             </div>
@@ -47,9 +37,9 @@
 </div>
 
 <footer class="border-top footer text-muted">
-    @*<div class="container">
+    <div class="container">
         &copy; 2025 - longDistanceTrains - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>*@
+    </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

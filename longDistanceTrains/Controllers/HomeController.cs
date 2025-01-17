@@ -1,42 +1,25 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using longDistanceTrains.Models;
-using trains.Data;
 
 namespace longDistanceTrains.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly TrainDbContext _db;
 
-    public HomeController(ILogger<HomeController> logger, TrainDbContext db)
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        _db = db;
     }
 
     public IActionResult Index()
     {
-        var routes = _db.routes.Select(r => r.title).ToList();
+        return View();
+    }
 
-        if (routes == null || !routes.Any())
-        {
-            ViewBag.Stations = new List<string>(); // Пустой список, если данных нет
-            return View();
-        }
-
-        var stations = new HashSet<string>();
-        foreach (var route in routes)
-        {
-            var parts = route.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var part in parts)
-            {
-                stations.Add(part.Trim());
-            }
-        }
-
-        ViewBag.Stations = stations.OrderBy(s => s).ToList();
+    public IActionResult Privacy()
+    {
         return View();
     }
 
