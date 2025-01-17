@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("longDistanceTrains")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a622f0e1dcc7b425b2005edca5d3253ab6ca64f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47325563b05a41921075e98499248179e25303b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("longDistanceTrains")]
 [assembly: System.Reflection.AssemblyTitleAttribute("longDistanceTrains")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

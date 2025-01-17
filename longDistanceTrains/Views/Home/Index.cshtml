@@ -1,6 +1,4 @@
-﻿<link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-
-<div class="wrapper">
+﻿<div class="wrapper">
     <div class="hero">
         <h1 class="hero-title">Укажите маршрут</h1>
         <p class="hero-subtitle">и дату поездки</p>
@@ -9,14 +7,23 @@
         </div>
         <div class="in city">
             <div class="from">
-                <input type="text" id="cityFrom" name="cityFrom" placeholder="Город отправления">
+                <select id="cityFrom" class="cityFromIn" name="cityFrom">
+                    <option value=""></option>
+                </select>
             </div>
             <img src="~/images/Arrow1.png" alt="" class="arrow">
             <div class="to">
-                <input type="text" id="cityTo" name="cityTo" placeholder="Город прибытия">
+                <select id="cityTo" class="cityToIn" name="cityTo">
+                    <option value=""></option>
+                </select>
             </div>
         </div>
-        <li class="show-offers"><a href=""><img class="trainBut" src="~/images/train.png" alt="">Показать предложения</a></li>
+
+        <li class="show-offers">
+            <a asp-action="Index" asp-route-id="@Model.title" id="showOffersButton" class="disabled">
+                <img class="trainBut" src="~/images/train.png" alt="">Показать предложения
+            </a>
+        </li>
         <div class="trainImgs">
             <div class="trainRed-container">
                 <img class="trainRed" src="~/images/trainRed.png" alt="">
@@ -24,6 +31,74 @@
                 <div class="train-light right"></div> <!-- Правая фара -->
             </div>
             <img class="trainGray" src="~/images/trainGray.png" alt="">
-        </div>                     
+        </div>
     </div>
-</div>    
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dateInput = document.getElementById("date");
+            var today = new Date();
+            var day = String(today.getDate()).padStart(2, '0');
+            var month = String(today.getMonth() + 1).padStart(2, '0');
+            var year = today.getFullYear();
+            dateInput.value = `${year}-${month}-${day}`;
+
+            var stations = @Html.Raw(Json.Serialize(ViewBag.Stations));
+
+            var cityFromSelect = document.getElementById("cityFrom");
+            var cityToSelect = document.getElementById("cityTo");
+            var showOffersButton = document.getElementById("showOffersButton");
+            
+            stations.forEach(function(station) {
+                var optionFrom = document.createElement("option");
+                optionFrom.value = station;
+                optionFrom.text = station;
+                cityFromSelect.appendChild(optionFrom);
+
+                var optionTo = document.createElement("option");
+                optionTo.value = station;
+                optionTo.text = station;
+                cityToSelect.appendChild(optionTo);
+            });
+            
+            cityFromSelect.addEventListener("change", function() {
+                var selectedFrom = cityFromSelect.value;
+                disableOption(cityToSelect, selectedFrom);
+                checkForm();
+            });
+            
+            cityToSelect.addEventListener("change", function() {
+                var selectedTo = cityToSelect.value;
+                disableOption(cityFromSelect, selectedTo);
+                checkForm();
+            });
+            
+            function disableOption(selectElement, valueToDisable) {
+                Array.from(selectElement.options).forEach(function(option) {
+                    if (option.value === valueToDisable) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+            }
+            
+            function checkForm() {
+                var isFromFilled = cityFromSelect.value !== "";
+                var isToFilled = cityToSelect.value !== "";
+
+                if (isFromFilled && isToFilled) {
+                    showOffersButton.classList.remove("disabled");
+                    showOffersButton.href = "#"; 
+                } else {
+                    showOffersButton.classList.add("disabled");
+                    showOffersButton.removeAttribute("href");
+                }
+            }
+            
+            checkForm();
+        });
+    </script>
+}
