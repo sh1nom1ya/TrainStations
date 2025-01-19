@@ -1,19 +1,42 @@
-@page
-@model trains.Models.Views.Schedule.Index
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<link rel="stylesheet" href="~/css/tickets.css" asp-append-version="true"/>
+<div class="hero">
+    <div class="routeSelect">
+        <div class="inputTT">
+            <input type="text" id="routeIn" class="routeIn" name="routeIn" placeholder="Москва - Санкт-Петербург">
+            <button class="routeBut">Изменить</button>
+        </div>
+    </div>
+    <div class="tickets">
+        <div class="lines">
+            <div class="string">
+                <div class="timeT">
+                    <p class="timeDep timeZV">00:25</p>
+                    <p class="timeAri timeZV">09:01</p>
+                </div>
+                <p class="timeRoute">8 ч 36 м в пути</p>
+                <img class="lineRoute" src="~/images/Line2.png" alt="">
+                <div class="stations">
+                    <div class="stationDep">
+                        <p class="st">Ленинградский вокзал</p>
+                        <p class="city">Москва</p>
+                    </div>
+                    <p class="route">Маршрут</p>
+                    <div class="stationAri">
+                        <p class="st">Московский вокзал</p>
+                        <p class="city">Санкт-Петербург</p>
+                    </div>
+                </div>
+                <img class="optionsT" src="~/images/tualetka.png" alt="">
+            </div>
+            <hr class="hrT">
+            <div class="knop">
+                <p class="underPrice">Место от</p>
+                <div class="finalPrice">
+                    <p class="totalPrice">3299</p>
+                    <p>р</p>
+                </div>
+                <button class="selectSet">Оформить</button>
+            </div>
+        </div>
+    </div>            
 </div>
-</body>
-</html>

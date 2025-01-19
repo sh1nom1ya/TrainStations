@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0%;
+}
+
+body {
+    font-family: "Montserrat";
+    font-weight: 400;
+    color: #fff;
+    background: #000; /* Black background */
+    padding: 0;
+    margin: 0;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+
+/* Обновлённый стиль для header */
+header {
+    position: fixed; /* Фиксированное позиционирование */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 25px;
+    background: rgba(3, 3, 3, 0.1); /* Полупрозрачный фон */
+    backdrop-filter: blur(10px); /* Размытие заднего фона */
+    -webkit-backdrop-filter: blur(10px); /* Для поддержки в Safari */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+    z-index: 1000; /* Высокий z-index для поверхностного расположения */
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-left: 25px;
+    margin-right: 70px;
+    vertical-align: middle;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-left: 25px;
+    margin-right: 70px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+header nav ul li{
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: 0;
+    transition: all 200ms ease;
+}
+
+header nav .right li:hover{
+    -webkit-filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+    filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+}
+
+.logo{
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.redlogo{
+    color: #FF0000;
+}
+
+.jd{
+    margin-left: 8px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+.wrapper {
+    background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,1) 100%),
+    url(/images/trainTexture.jpg) no-repeat center center fixed;
+    background-color: #000;
+    background-size: cover;
+    max-width: 100%;
+    padding-top: 80px; /* Добавьте отступ, соответствующий высоте header */
+    overflow-x: hidden;
+}
+
+.hero {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h1{
+    margin-bottom: 30px;
+}
+
+.routeSelect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inputTT {
+    position: relative;
+    display: inline-block;
+}
+
+.routeIn {
+    width: 49em;
+    height: 3em;
+    padding: 10px;
+    padding-right: 120px; /* Оставляем место для кнопки */
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-weight: 600;
+    color: #000000;
+    appearance: none;
+    transition: all 200ms ease;
+    box-sizing: border-box;
+}
+
+.routeBut {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(123deg, rgba(255,3,96,1) 0%, rgba(244,30,51,1) 52%, rgba(146,4,6,1) 100%);
+    border: none;
+    font-size: 24px;
+    width: 6em;
+    height: 2.5em;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    transition: all 200ms ease;
+}
+
+.routeBut:hover {
+    filter: brightness(0.8);
+}
+
+.routeIn:focus,
+select:focus {
+    outline: none; /* Убираем стандартное выделение */
+    border: 1px solid rgba(255, 0, 0, 0.554); /* Красная обводка при выборе */
+}
+
+.tickets{
+    margin-inline: 5%;
+    margin-top: 50px;
+    font-family: Montserrat;
+    padding-bottom: 100px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lines{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    display: flex;
+    justify-content:left;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+.lines .string {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); */
+    color: #fff;
+    margin: 20px 5px 0 5px;
+    padding: 28px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.timeT{
+    display: flex;
+    justify-content: left;
+    gap: 17em;
+    margin-left: 1em;
+    padding-left: 0;
+}
+
+.timeT p{
+    font-size: 36px;
+
+}
+
+.lineRoute{
+    margin-left: 5%;
+    width: 77%;
+    height: auto;
+}
+
+.timeRoute{
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 3.5em;
+}
+
+.stations{
+    display: flex;
+    font-weight: 400;
+    justify-content: space-between;
+    gap: 5em;
+    margin-left: 0.3em;
+    padding-left: 0;
+    text-align: center;
+    margin-top: 0.3em;
+}
+
+.stationDep, .stationAri{
+    display: flex;
+    flex-direction: column;
+}
+
+.st{
+    font-size: 18px;
+}
+
+.city{
+    font-size: 15px;
+}
+
+.route{
+    font-size: 20px;
+    color: #FF0000;
+    cursor: pointer;
+}
+
+.optionsT{
+    margin-top: 1.5em;
+    margin-left: 1.3em;
+    width: 18%;
+    height: 15%;
+}
+
+.selectSet{
+    background: linear-gradient(123deg, rgba(255,3,96,1) 0%, rgba(244,30,51,1) 52%, rgba(146,4,6,1) 100%);
+    border: none;
+    font-size: 24px;
+    width: 9em;
+    height: 2em;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    transition: all 200ms ease;
+}
+
+.selectSet:hover {
+    filter: brightness(0.8); /* Затемнение кнопки при наведении */
+}
+
+.hrT{
+    padding: 0;
+    margin: 0;
+}
+
+.knop{
+    margin: auto;
+}
+
+#qrCodeImage{
+    width: 12em;
+    height: 12em;
+}
+
+#qrCodeExpanded {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    z-index: 1000;
+}
+
+#qrCodeExpanded img {
+    width: 200px; /* Размер увеличенного QR-кода */
+    height: auto;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1001; /* Поверх всех элементов */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Полупрозрачный чёрный фон */
+    overflow: auto;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
