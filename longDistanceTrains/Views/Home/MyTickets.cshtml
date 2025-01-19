@@ -1,19 +1,57 @@
-@page
-@model trains.Models.Views.Home.MyTickets
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<link rel="stylesheet" href="~/css/myTickets.css" asp-append-version="true"/>
+<div class="hero">
+    <h1>Ваши билеты</h1>
+    <div class="tickets">
+        <div class="lines">
+            <div class="string">
+                <div class="timeT">
+                    <p class="timeDep">00:25</p>
+                    <p class="timeAri">09:01</p>
+                </div>
+                <p class="timeRoute">8 ч 36 м в пути</p>
+                <img class="lineRoute" src="~/images/Line2.png" alt="">
+                <div class="stations">
+                    <div class="stationDep">
+                        <p class="st">Ленинградский вокзал</p>
+                        <p class="city">Москва</p>
+                    </div>
+                    <li class="route"><a href=""></a>Маршрут</li>
+                    <div class="stationAri">
+                        <p class="st">Московский вокзал</p>
+                        <p class="city">Санкт-Петербург</p>
+                    </div>
+                </div>
+                <img class="optionsT" src="~/images/tualetka.png" alt="">
+            </div>
+            <hr class="hrT">
+            <div class="knop">
+                <img id="qrCodeImage" src="~/images/qrCode.png" alt="QR Code" onclick="openFullscreenQR()">
+            </div>
+        </div>
+    </div>            
 </div>
-</body>
-</html>
+<!-- Модальное окно для полноэкранного QR-кода -->
+<div id="fullscreenQRModal" class="modal">
+    <span class="close" onclick="closeFullscreenQR()">&times;</span>
+    <img class="modal-content" id="fullscreenQRImage" src="~/images/qrCode.png" alt="Fullscreen QR Code">
+</div>
+
+<script>
+        function openFullscreenQR() {
+            const modal = document.getElementById('fullscreenQRModal');
+            modal.style.display = 'block'; // Показываем модальное окно
+        }
+
+        function closeFullscreenQR() {
+            const modal = document.getElementById('fullscreenQRModal');
+            modal.style.display = 'none'; // Скрываем модальное окно
+        }
+
+        // Закрытие модального окна при клике вне изображения
+        window.onclick = function(event) {
+            const modal = document.getElementById('fullscreenQRModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>

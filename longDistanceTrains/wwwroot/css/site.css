@@ -19,6 +19,7 @@ body {
 
 a{
   text-decoration: none;
+  color: #fff;
 }
 
 li{
@@ -33,7 +34,7 @@ header {
   left: 0;
   width: 100%;
   padding: 10px 25px;
-  background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+  background: rgba(3, 3, 3, 0.1); /* Полупрозрачный фон */
   backdrop-filter: blur(10px); /* Размытие заднего фона */
   -webkit-backdrop-filter: blur(10px); /* Для поддержки в Safari */
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
@@ -75,6 +76,8 @@ header nav .right li:hover{
 .logo{
   font-weight: 600;
   font-size: 28px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .redlogo{
@@ -91,10 +94,11 @@ header nav .right li:hover{
 
 .wrapper {
   background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,1) 100%),
-  url(~/images/trainTexture.jpg) no-repeat center center fixed;
+  url(/images/trainTexture.jpg) no-repeat center center fixed;
   background-color: #000;
   background-size: cover;
   max-width: 100%;
+  min-height: 859px;
   padding-top: 80px; /* Добавьте отступ, соответствующий высоте header */
   overflow-x: hidden;
 }
@@ -106,7 +110,6 @@ header nav .right li:hover{
   flex-direction: column; /* Элементы будут располагаться вертикально */
   justify-content: center; /* Центрирование по вертикали */
   align-items: center; /* Центрирование по горизонтали */
-
 }
 
 .hero {
@@ -124,11 +127,11 @@ label {
   min-width: 170px;
 }
 
-input[type="text"],
-input[type="date"] {
+.cityIn,
+.dateIn {
   width: 17em;
   height: 4em;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   border-radius: 20px;
   border: none;
@@ -143,12 +146,15 @@ input[type="date"] {
   box-sizing: border-box; /* Учитываем padding и border в ширине */
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-textarea:focus,
+.cityIn:focus,
+.dateIn:focus,
 select:focus {
   outline: none; /* Убираем стандартное выделение */
   border: 1px solid rgba(255, 0, 0, 0.554); /* Красная обводка при выборе */
+}
+
+.dateIn {
+  font-size: 20px;
 }
 
 .in.city {
@@ -162,7 +168,7 @@ select:focus {
   flex: 1; /* Равномерное распределение ширины */
 }
 
-input[type="date"] {
+.dateIn {
   width: 6.8em;
   position: relative;
   top: 2em;
@@ -242,7 +248,7 @@ input[type="date"] {
 
 /* Позиция левой фары */
 .train-light.left {
-  top: 60%; /* Подогнать под положение фар на поезде */
+  top: 61%; /* Подогнать под положение фар на поезде */
   left: 59%; /* Расположение относительно поезда */
 }
 
@@ -281,3 +287,42 @@ input[type="date"] {
   }
 }
 
+select {
+  width: 50%;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.9); /* Transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Border matching the form */
+  color: #fff;
+  appearance: none;
+  transition: all 200ms ease;
+}
+
+select:focus {
+  outline: none; /* Убираем стандартное выделение */
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+/* Футер */
+/* -------------------------- */
+.site-footer {
+  background-color: #000;
+  padding: 50px 0;
+  color: #fff;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+}
+
+.footer-content p {
+  margin: 0;
+  opacity: 0.8;
+}
+/* ----------------------- */

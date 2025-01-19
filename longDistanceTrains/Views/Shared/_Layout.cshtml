@@ -10,46 +10,46 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">longDistanceTrains</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="half right">
-                    <li class="vid">
-                        @{
-                            if (User.Identity.IsAuthenticated)
-                            {
-                                <a asp-area="Identity" asp-page="/Account/Manage/Index" id="profile">
-                                    <img src="КАРТИНКА" alt="Профиль">
-                                </a>
-                            }
-                            else
-                            {
-                                <a asp-area="Identity" asp-page="/Account/Login" id="login" >
-                                    <img src="КАРТИНКА" alt="Логин">
-                                </a>
-                            }
-                        }
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <nav>
+        <ul class="half left">
+            <li>
+                <a asp-controller="Home" asp-action="Index">
+                    <p class="logo"><span class="redlogo">Shma</span>Train<span class="jd">ж/д билеты</span></p>
+                </a>
+            </li>
+        </ul>
+        <ul class="half right">
+            <li class="vid">
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" id="profile">
+                            Профиль
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" id="login" >
+                            Войти
+                        </a>
+                    }
+                }
+            </li>
+        </ul>
     </nav>
 </header>
 <div>
     <main role="main" class="pb-3">
-        @RenderBody()
+        <div class="wrapper">
+            @RenderBody()
+        </div>
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
-    @*<div class="container">
-        &copy; 2025 - longDistanceTrains - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>*@
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>© 2025 ShmaTrain. Все права защищены.</p>
+    </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

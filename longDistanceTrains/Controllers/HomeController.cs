@@ -18,25 +18,25 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var routes = _db.routes.Select(r => r.title).ToList();
-
-        if (routes == null || !routes.Any())
-        {
-            ViewBag.Stations = new List<string>();
-            return View();
-        }
-
-        var stations = new HashSet<string>();
-        foreach (var route in routes)
-        {
-            var parts = route.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var part in parts)
-            {
-                stations.Add(part.Trim());
-            }
-        }
-
-        ViewBag.Stations = stations.OrderBy(s => s).ToList();
+        // var routes = _db.routes.Select(r => r.title).ToList();
+        //
+        // if (routes == null || !routes.Any())
+        // {
+        //     ViewBag.Stations = new List<string>();
+        //     return View();
+        // }
+        //
+        // var stations = new HashSet<string>();
+        // foreach (var route in routes)
+        // {
+        //     var parts = route.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+        //     foreach (var part in parts)
+        //     {
+        //         stations.Add(part.Trim());
+        //     }
+        // }
+        //
+        // ViewBag.Stations = stations.OrderBy(s => s).ToList();
         return View();
     }
     
