@@ -22,7 +22,7 @@ public class HomeController : Controller
 
         if (routes == null || !routes.Any())
         {
-            ViewBag.Stations = new List<string>(); // Пустой список, если данных нет
+            ViewBag.Stations = new List<string>();
             return View();
         }
 
@@ -37,6 +37,11 @@ public class HomeController : Controller
         }
 
         ViewBag.Stations = stations.OrderBy(s => s).ToList();
+        return View();
+    }
+    
+    public IActionResult MyTickets()
+    {
         return View();
     }
 
