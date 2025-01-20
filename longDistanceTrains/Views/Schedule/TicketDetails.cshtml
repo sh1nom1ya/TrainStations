@@ -1,19 +1,106 @@
-@page
-@model trains.Models.Views.Schedule.TicketDetails
+<link rel="stylesheet" href="~/css/ticketDetails.css" asp-append-version="true"/>
+<div class="hero">
+    <div class="passenger-section">
+        <h2>Укажите количество пассажиров</h2>
+        <div class="counter">
+            <div class="counter-item">
+                <span>Взрослые</span>
+                <p>Старше 10 лет</p>
+                <div class="controls">
+                    <button class="decrement" data-target="adults">-</button>
+                    <span id="adult-count">1</span>
+                    <button class="increment" data-target="adults">+</button>
+                </div>
+            </div>
+            <div class="counter-item">
+                <span>Дети</span>
+                <p>Младше 10 лет</p>
+                <div class="controls">
+                    <button class="decrement" data-target="children">-</button>
+                    <span id="child-count">0</span>
+                    <button class="increment" data-target="children">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="compartment-section">
+        <h2>Выберите вагон</h2>
+        <div class="compartment-options">
+            <div class="compartment" data-price="3299" data-name="Плацкарт">Плацкарт<br><span>3299 р.</span></div>
+            <div class="compartment" data-price="3299" data-name="Купе">Купе<br><span>3299 р.</span></div>
+            <div class="compartment" data-price="3299" data-name="СВ">СВ<br><span>3299 р.</span></div>
+        </div>
+    </div>
+    <div class="confirmation-section">
+        <button id="confirm-selection">Подтвердить выбор</button>
+    </div>
+</div>  
 
-@{
-    Layout = null;
-}
+<script>// Passenger Counter Logic
+    const adultCount = document.getElementById('adult-count');
+    const childCount = document.getElementById('child-count');
+    const buttons = document.querySelectorAll('button');
 
-<!DOCTYPE html>
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const target = button.dataset.target;
+            const isIncrement = button.classList.contains('increment');
+            const countElement = target === 'adults' ? adultCount : childCount;
+            let currentCount = parseInt(countElement.textContent);
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>
+            // Update Count
+            currentCount += isIncrement ? 1 : -1;
+
+            // Validate Count
+            if (currentCount < 0) currentCount = 0;
+            if (currentCount > 10) currentCount = 10; // Maximum of 10 passengers for example.
+
+            countElement.textContent = currentCount;
+        });
+    });
+
+    // Compartment Selection Logic
+    const compartments = document.querySelectorAll('.compartment');
+
+    compartments.forEach((compartment) => {
+        compartment.addEventListener('click', () => {
+            compartments.forEach((c) => c.classList.remove('active'));
+            compartment.classList.add('active');
+        });
+    });
+
+
+    document.getElementById('confirm-selection').addEventListener('click', () => {
+        const adults = parseInt(document.getElementById('adult-count').textContent);
+        const children = parseInt(document.getElementById('child-count').textContent);
+        const activeCompartment = document.querySelector('.compartment.active');
+
+        if (!activeCompartment) {
+            alert('Пожалуйста, выберите вагон.');
+            return;
+        }
+
+        const compartment = activeCompartment.dataset.name;
+
+        // Отправка данных на сервер
+        fetch('/api/SaveBookingDetails', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                Adults: adults,
+                Children: children,
+                Compartment: compartment
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Ошибка при сохранении данных:', error);
+                alert('Произошла ошибка при сохранении данных.');
+            });
+    });
+
+
+</script>
