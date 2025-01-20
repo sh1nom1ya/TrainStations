@@ -68,7 +68,7 @@ select:focus {
     margin-inline: 5%;
     margin-top: 50px;
     font-family: Montserrat;
-    padding-bottom: 100px;
+    padding-bottom: 1px;
     width: 70%;
     display: flex;
     justify-content: space-between;
