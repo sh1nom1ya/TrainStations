@@ -1,42 +1,68 @@
+@model longDistanceTrains.Models.ViewModels.ScheduleViewModel
 <link rel="stylesheet" href="~/css/tickets.css" asp-append-version="true"/>
-<div class="hero">
-    <div class="routeSelect">
-        <div class="inputTT">
-            <input type="text" id="routeIn" class="routeIn" name="routeIn" placeholder="Москва - Санкт-Петербург">
-            <button class="routeBut">Изменить</button>
+
+@if (Model == null)
+{
+    <p>Маршрут не найден.</p>
+}
+else
+{
+    <div class="hero">
+        <div class="routeSelect">
+            <div class="inputTT">
+                <input type="text" id="routeIn" class="routeIn" name="routeIn" placeholder="Москва - Санкт-Петербург"
+                       value="@Model.RouteTitle" readonly>
+                <a asp-controller="Home" asp-action="Index" class="routeBut">Изменить</a>
+            </div>
         </div>
+        @if (Model.Schedules != null && Model.Schedules.Any())
+        {
+            foreach (var schedule in Model.Schedules)
+            {
+                var travelTime = schedule.timeArrival - schedule.timeDeparture;
+                var hours = travelTime.Hours;
+                var minutes = travelTime.Minutes;
+
+                <div class="tickets">
+                    <div class="lines">
+                        <div class="string">
+                            <div class="timeT">
+                                <p class="timeDep timeZV">@schedule.timeDeparture.ToString("HH:mm")</p>
+                                <p class="timeAri timeZV">@schedule.timeArrival.ToString("HH:mm")</p>
+                            </div>
+                            <p class="timeRoute">@hours ч @minutes м в пути</p>
+                            <img class="lineRoute" src="~/images/Line2.png" alt="">
+                            <div class="stations">
+                                <div class="stationDep">
+                                    <p class="st">@Model.Stops?.FirstOrDefault()</p>
+                                    <p class="city">@Model.Cities?.FirstOrDefault()</p>
+                                </div>
+                                <p class="route">Маршрут</p>
+                                <div class="stationAri">
+                                    <p class="st">@Model.Stops?.LastOrDefault()</p>
+                                    <p class="city">@Model.Cities?.LastOrDefault()</p>
+                                </div>
+                            </div>
+                            <img class="optionsT" src="~/images/tualetka.png" alt="">
+                        </div>
+                        <hr class="hrT">
+                        <div class="knop">
+                            <p class="underPrice">Место от</p>
+                            <div class="finalPrice">
+                                <p class="totalPrice">@Model.Price</p>
+                                <p>р</p>
+                            </div>
+                            <button class="selectSet">Оформить</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="tickets">
+                <p>Расписание не найдено.</p>
+            </div>
+        }
     </div>
-    <div class="tickets">
-        <div class="lines">
-            <div class="string">
-                <div class="timeT">
-                    <p class="timeDep timeZV">00:25</p>
-                    <p class="timeAri timeZV">09:01</p>
-                </div>
-                <p class="timeRoute">8 ч 36 м в пути</p>
-                <img class="lineRoute" src="~/images/Line2.png" alt="">
-                <div class="stations">
-                    <div class="stationDep">
-                        <p class="st">Ленинградский вокзал</p>
-                        <p class="city">Москва</p>
-                    </div>
-                    <p class="route">Маршрут</p>
-                    <div class="stationAri">
-                        <p class="st">Московский вокзал</p>
-                        <p class="city">Санкт-Петербург</p>
-                    </div>
-                </div>
-                <img class="optionsT" src="~/images/tualetka.png" alt="">
-            </div>
-            <hr class="hrT">
-            <div class="knop">
-                <p class="underPrice">Место от</p>
-                <div class="finalPrice">
-                    <p class="totalPrice">3299</p>
-                    <p>р</p>
-                </div>
-                <button class="selectSet">Оформить</button>
-            </div>
-        </div>
-    </div>            
-</div>
+}

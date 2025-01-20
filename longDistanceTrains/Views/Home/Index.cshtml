@@ -1,36 +1,38 @@
 ﻿<div class="hero">
     <h1 class="hero-title">Укажите маршрут</h1>
     <p class="hero-subtitle">и дату поездки</p>
-    <div class="in date">
-        <input class="dateIn" type="date" id="date" name="date" placeholder="Дата">
-    </div>
-    <div class="in city">
-        <div class="from">
-            <select id="cityFrom" class="cityFromIn cityIn" name="cityFrom">
-                <option value=""></option>
-            </select>
+    <form asp-controller="Home" asp-action="FindSchedule" method="post">
+        <div class="in date">
+            <input class="dateIn" type="date" id="date" name="date" placeholder="Дата" value="@DateTime.Now.ToString("yyyy-MM-dd")">
         </div>
-        <img src="~/images/Arrow1.png" alt="" class="arrow">
-        <div class="to">
-            <select id="cityTo" class="cityToIn cityIn" name="cityTo">
-                <option value=""></option>
-            </select>
+        <div class="in city">
+            <div class="from">
+                <select id="cityFrom" class="cityFromIn cityIn" name="cityFrom">
+                    <option value=""></option>
+                </select>
+            </div>
+            <img src="~/images/Arrow1.png" alt="" class="arrow">
+            <div class="to">
+                <select id="cityTo" class="cityToIn cityIn" name="cityTo">
+                    <option value=""></option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <li class="show-offers">
-        <a asp-controller="Schedule" asp-action="Index" id="showOffersButton" class="disabled">
-            <img class="trainBut" src="~/images/train.png" alt="">Показать предложения
-        </a>
-    </li>
-    <div class="trainImgs">
-        <div class="trainRed-container">
-            <img class="trainRed" src="~/images/trainRed.png" alt="">
-            <div class="train-light left"></div> 
-            <div class="train-light right"></div>
+        <li class="show-offers">
+            <button type="submit" id="showOffersButton" class="disables">
+                <img class="trainBut" src="~/images/train.png" alt="">Показать предложения
+            </button>
+        </li>
+        <div class="trainImgs">
+            <div class="trainRed-container">
+                <img class="trainRed" src="~/images/trainRed.png" alt="">
+                <div class="train-light left"></div> 
+                <div class="train-light right"></div>
+            </div>
+            <img class="trainGray" src="~/images/trainGray.png" alt="">
         </div>
-        <img class="trainGray" src="~/images/trainGray.png" alt="">
-    </div>
+    </form>
 </div>
 
 @section Scripts {
@@ -89,10 +91,8 @@
 
                 if (isFromFilled && isToFilled) {
                     showOffersButton.classList.remove("disabled");
-                    showOffersButton.href = "#"; 
                 } else {
                     showOffersButton.classList.add("disabled");
-                    showOffersButton.removeAttribute("href");
                 }
             }
             
