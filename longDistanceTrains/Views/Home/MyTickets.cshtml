@@ -1,43 +1,61 @@
+@model longDistanceTrains.Models.ViewModels.MyTicketsVM
 <link rel="stylesheet" href="~/css/myTickets.css" asp-append-version="true"/>
 
 <div class="hero">
     <h1>Ваши билеты</h1>
     <div class="tickets">
-        <div class="lines">
-            <div class="string">
-                <div class="timeT">
-                    <p class="timeDep">00:25</p>
-                    <p class="timeAri">09:01</p>
-                </div>
-                <p class="timeRoute">8 ч 36 м в пути</p>
-                <img class="lineRoute" src="~/images/Line2.png" alt="">
-                <div class="stations">
-                    <div class="stationDep">
-                        <p class="st">Ленинградский вокзал</p>
-                        <p class="city">Москва</p>
+        @foreach (var detail in Model.TicketDetails)
+        {
+            var ticket = detail.Ticket;
+            var route = detail.Route;
+            var schedules = detail.Schedules;
+            
+            var timeDeparture = schedules.FirstOrDefault()?.timeDeparture.ToString("HH:mm") ?? "N/A";
+            var timeArrival = schedules.LastOrDefault()?.timeArrival.ToString("HH:mm") ?? "N/A";
+
+            var stops = route.stops.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            var departureStation = stops.FirstOrDefault()?.Trim() ?? "N/A";
+            var arrivalStation = stops.LastOrDefault()?.Trim() ?? "N/A";
+            var cities = route.title.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            var departureCity = cities.FirstOrDefault()?.Trim() ?? "N/A";
+            var arrivalCity = cities.LastOrDefault()?.Trim() ?? "N/A";
+
+            <div class="lines">
+                <div class="string">
+                    <div class="timeT">
+                        <p class="timeDep">@timeDeparture</p>
+                        <p class="timeAri">@timeArrival</p>
                     </div>
-                    <li class="route"><a href=""></a>Маршрут</li>
-                    <div class="stationAri">
-                        <p class="st">Московский вокзал</p>
-                        <p class="city">Санкт-Петербург</p>
+                    <img class="lineRoute" src="~/images/Line2.png" alt="">
+                    <div class="stations">
+                        <div class="stationDep">
+                            <p class="st">@departureStation</p>
+                            <p class="city">@departureCity</p>
+                        </div>
+                        <li class="route"><a href="">Маршрут</a></li>
+                        <div class="stationAri">
+                            <p class="st">@arrivalStation</p>
+                            <p class="city">@arrivalCity</p>
+                        </div>
                     </div>
+                    <img class="optionsT" src="~/images/tualetka.png" alt="">
                 </div>
-                <img class="optionsT" src="~/images/tualetka.png" alt="">
+                <hr class="hrT">
+                <div class="knop">
+                    <img id="qrCodeImage" src="~/images/qrCode.png" alt="QR Code" onclick="openFullscreenQR()">
+                </div>
             </div>
-            <hr class="hrT">
-            <div class="knop">
-                <img id="qrCodeImage" src="~/images/qrCode.png" alt="QR Code" onclick="openFullscreenQR()">
-            </div>
-        </div>
-    </div>            
+        }
+    </div>
 </div>
-<!-- Модальное окно для полноэкранного QR-кода -->
+
 <div id="fullscreenQRModal" class="modal">
     <span class="close" onclick="closeFullscreenQR()">&times;</span>
     <img class="modal-content" id="fullscreenQRImage" src="~/images/qrCode.png" alt="Fullscreen QR Code">
 </div>
 
-<script>
+@section Scripts{
+    <script>
         function openFullscreenQR() {
             const modal = document.getElementById('fullscreenQRModal');
             modal.style.display = 'block'; // Показываем модальное окно
@@ -56,3 +74,4 @@
             }
         };
     </script>
+}
