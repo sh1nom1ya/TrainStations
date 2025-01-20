@@ -52,7 +52,10 @@ else
                                 <p class="totalPrice">@Model.Price</p>
                                 <p>р</p>
                             </div>
-                            <button class="selectSet">Оформить</button>
+                            <form asp-controller="Schedule" asp-action="ForTicketDetails" method="post">
+                                <input type="hidden" name="scheduleId" value="@schedule.scheduleID" />
+                                <button type="submit" class="selectSet">Оформить</button>
+                            </form>
                         </div>
                     </div>
                 </div>

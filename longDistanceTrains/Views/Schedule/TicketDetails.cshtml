@@ -26,9 +26,10 @@
     <div class="compartment-section">
         <h2>Выберите вагон</h2>
         <div class="compartment-options">
-            <div class="compartment" data-price="3299" data-name="Плацкарт">Плацкарт<br><span>3299 р.</span></div>
-            <div class="compartment" data-price="3299" data-name="Купе">Купе<br><span>3299 р.</span></div>
-            <div class="compartment" data-price="3299" data-name="СВ">СВ<br><span>3299 р.</span></div>
+            @foreach (var wagon in ViewBag.WagonPrices)
+            {
+                <div class="compartment" data-price="@wagon.Price" data-name="@wagon.Name">@wagon.Name<br><span>@wagon.Price.ToString("0.00") р.</span></div>
+            }
         </div>
     </div>
     <div class="confirmation-section">
@@ -36,7 +37,7 @@
     </div>
 </div>  
 
-<script>// Passenger Counter Logic
+<script>
     const adultCount = document.getElementById('adult-count');
     const childCount = document.getElementById('child-count');
     const buttons = document.querySelectorAll('button');
@@ -48,18 +49,15 @@
             const countElement = target === 'adults' ? adultCount : childCount;
             let currentCount = parseInt(countElement.textContent);
 
-            // Update Count
             currentCount += isIncrement ? 1 : -1;
 
-            // Validate Count
             if (currentCount < 0) currentCount = 0;
-            if (currentCount > 10) currentCount = 10; // Maximum of 10 passengers for example.
+            if (currentCount > 10) currentCount = 10; 
 
             countElement.textContent = currentCount;
         });
     });
 
-    // Compartment Selection Logic
     const compartments = document.querySelectorAll('.compartment');
 
     compartments.forEach((compartment) => {
@@ -82,7 +80,6 @@
 
         const compartment = activeCompartment.dataset.name;
 
-        // Отправка данных на сервер
         fetch('/api/SaveBookingDetails', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -18,9 +18,4 @@ public class PaymentController : Controller
     {
         return View();
     }
-    
-    public IActionResult Check()
-    {
-        return View();
-    }
 }
