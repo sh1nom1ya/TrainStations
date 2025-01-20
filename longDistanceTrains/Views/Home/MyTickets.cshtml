@@ -10,8 +10,10 @@
             var route = detail.Route;
             var schedules = detail.Schedules;
             
-            var timeDeparture = schedules.FirstOrDefault()?.timeDeparture.ToString("HH:mm") ?? "N/A";
-            var timeArrival = schedules.LastOrDefault()?.timeArrival.ToString("HH:mm") ?? "N/A";
+            var ticketSchedule = schedules.FirstOrDefault(s => s.routFK == route.routeID);
+            
+            var timeDeparture = ticketSchedule?.timeDeparture.ToString("HH:mm") ?? "N/A";
+            var timeArrival = ticketSchedule?.timeArrival.ToString("HH:mm") ?? "N/A";
 
             var stops = route.stops.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             var departureStation = stops.FirstOrDefault()?.Trim() ?? "N/A";
@@ -19,6 +21,8 @@
             var cities = route.title.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             var departureCity = cities.FirstOrDefault()?.Trim() ?? "N/A";
             var arrivalCity = cities.LastOrDefault()?.Trim() ?? "N/A";
+
+            var isTicketExpired = ticketSchedule?.timeDeparture < DateTime.Now;
 
             <div class="lines">
                 <div class="string">
@@ -41,9 +45,12 @@
                     <img class="optionsT" src="~/images/tualetka.png" alt="">
                 </div>
                 <hr class="hrT">
-                <div class="knop">
-                    <img id="qrCodeImage" src="~/images/qrCode.png" alt="QR Code" onclick="openFullscreenQR()">
-                </div>
+                @if (!isTicketExpired)
+                {
+                    <div class="knop">
+                        <img id="qrCodeImage" src="~/images/qrCode.png" alt="QR Code" onclick="openFullscreenQR()">
+                    </div>
+                }
             </div>
         }
     </div>
