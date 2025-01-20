@@ -20,6 +20,11 @@
         </ul>
         <ul class="half right">
             <li class="vid">
+                <a asp-controller="Home" asp-action="MyTickets">
+                    Мои Билеты
+                </a>
+            </li>
+            <li class="vid">
                 @{
                     if (User.Identity.IsAuthenticated)
                     {
@@ -29,7 +34,7 @@
                     }
                     else
                     {
-                        <a asp-area="Identity" asp-page="/Account/Login" id="login" >
+                        <a asp-area="Identity" asp-page="/Account/Login" id="login">
                             Войти
                         </a>
                     }

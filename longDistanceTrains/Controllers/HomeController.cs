@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using longDistanceTrains.Models;
 using longDistanceTrains.Models.ViewModels;
@@ -73,7 +74,40 @@ public class HomeController : Controller
     
     public IActionResult MyTickets()
     {
-        return View();
+        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        var userTickets = _db.tickets
+            .Where(t => t.userID == userID)
+            .ToList();
+        
+        var ticketDetails = new List<TicketDetail>();
+
+        foreach (var ticket in userTickets)
+        {
+            var route = _db.routes.FirstOrDefault(r => r.routeID == ticket.routFK);
+
+            if (route != null)
+            {
+                var schedules = _db.schedules
+                    .Where(s => s.routFK == route.routeID)
+                    .ToList();
+                
+                ticketDetails.Add(new TicketDetail
+                {
+                    Ticket = ticket,
+                    Route = route,
+                    Schedules = schedules
+                });
+            }
+        }
+        
+        var myTicketsVM = new MyTicketsVM
+        {
+            MyTickets = userTickets,
+            TicketDetails = ticketDetails
+        };
+
+        return View(myTicketsVM);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
