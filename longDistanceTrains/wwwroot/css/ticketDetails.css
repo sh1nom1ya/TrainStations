@@ -1,0 +1,153 @@
+.hero {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline: 20em;
+}
+
+
+/* Section Styles */
+.passenger-section, .compartment-section {
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Counter Styling */
+.counter {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.counter-item {
+    background: linear-gradient(135deg, rgba(3, 3, 3, 0.5), rgba(3, 3, 3, 0.1));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 3em 1.5em 3em 1.5em;
+    border-radius: 8px;
+    flex: 1;
+    text-align: center;
+    width: 515px;
+    height: 176px;
+}
+
+.counter-item span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    background-color: #ff4747;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #555;
+}
+
+#adult-count, #child-count {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Compartment Options */
+.compartment-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 5em;
+}
+
+.compartment {
+    background: linear-gradient(135deg, rgba(3, 3, 3, 0.5), rgba(3, 3, 3, 0.1));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 4em 2em 4em 2em;
+    text-align: center;
+    border-radius: 8px;
+    flex: 1;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 340px;
+    height: 168px;
+}
+
+.compartment span {
+    font-weight: 400;
+}
+
+.compartment:hover {
+    transform: scale(1.05);
+    background-color: #444;
+}
+
+.compartment.active {
+    background-color: #ff4747;
+}
+
+.confirmation-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#confirm-selection {
+    background: linear-gradient(123deg, rgba(255,3,96,1) 0%, rgba(244,30,51,1) 52%, rgba(146,4,6,1) 100%);
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    padding:15px 40px 40px 40px;
+    width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+#confirm-selection:hover {
+    background: linear-gradient(123deg, rgba(203,4,77,1) 1%, rgba(187,22,38,1) 52%, rgba(102,3,5,1) 100%);
+}
+
+#compartment-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+#compartment-select:focus {
+    border-color: #007acc;
+    box-shadow: 0 0 6px rgba(0, 122, 204, 0.6);
+}
