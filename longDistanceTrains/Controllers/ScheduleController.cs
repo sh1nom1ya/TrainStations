@@ -24,33 +24,37 @@ public class ScheduleController : Controller
         {
             return RedirectToAction("Error", "Home");
         }
-        
+
         var routeVM = JsonConvert.DeserializeObject<RouteVM>(routeVMJson);
-        
+
         var route = _db.routes.FirstOrDefault(r => r.title.Trim() == routeVM.RouteTitle.Trim());
-        
+
         if (route == null)
         {
             ViewBag.Error = "Маршрут не найден";
-            return View("Error"); 
+            return View("Error");
         }
         
-        var schedules = _db.schedules
-            .Where(s => s.routFK == route.routeID)
-            .ToList();
+        var selectedDateJson = HttpContext.Session.GetString("SelectedDate");
+        DateTime selectedDate = selectedDateJson != null ? JsonConvert.DeserializeObject<DateTime>(selectedDateJson) : DateTime.Now;
         
-        DateTime endDate = DateTime.Now; 
+        var schedules = _db.schedules
+            .Where(s => s.routFK == route.routeID && s.timeDeparture.Date == selectedDate.Date)
+            .ToList();
+
+        DateTime endDate = DateTime.Now;
         if (schedules.Any())
         {
             var maxArrivalTime = schedules.Max(s => s.timeArrival);
             endDate = maxArrivalTime.Date;
         }
+
         var scheduleViewModel = new ScheduleViewModel
         {
             RouteID = route.routeID,
             RouteTitle = route.title,
             Schedules = schedules,
-            SelectedDate = DateTime.Now, 
+            SelectedDate = selectedDate,
             EndDate = endDate,
             Stops = route.stops.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
@@ -60,7 +64,7 @@ public class ScheduleController : Controller
                 .ToList(),
             Price = route.price
         };
-        
+
         return View(scheduleViewModel);
     }
     

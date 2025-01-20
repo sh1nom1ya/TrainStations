@@ -1,0 +1,152 @@
+.profile {
+    margin-top: 80px;
+    display: flex;
+    max-width: 1000px;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #fff;
+    display: flex;
+}
+
+.leftinf {
+    height: 500px;
+    max-width: 40%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 2em;
+}
+
+
+.profile h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-left: 130px;
+    text-align: center;
+}
+
+
+.verf {
+    font-size: 0.8rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+span {
+    display: flex;
+    gap: 5px;
+}
+
+.ava {
+    width: 50%;
+    margin-left: 80px;
+}
+
+
+.btnProf {
+    font-weight: 600;
+    margin-top: 2rem;
+    width: 100%;
+    padding: 0.8em;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 200ms ease;
+}
+
+.inp {
+    margin-top: 50px;
+    margin-left: 55px;
+    width: 400px;
+}
+
+.inputprof {
+    margin-top: 5px;
+    padding: 0.5em;
+    font-size: 1rem;
+    width: 120%;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #fff;
+}
+
+.btnProf:hover {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.359);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.126), rgba(255, 255, 255, 0));
+}
+
+.btnProf:active {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.359);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.126), rgba(255, 255, 255, 0));
+    transform: scale(0.9);
+}
+
+.save {
+    font-weight: 600;
+    width: 120%;
+    margin-top: 2rem;
+    padding: 0.8em;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 200ms ease;
+}
+
+.save:hover {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.359);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.126), rgba(255, 255, 255, 0));
+}
+
+.save:active {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.359);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.126), rgba(255, 255, 255, 0));
+    transform: scale(0.9);
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.554);
+}
+
+
+label {
+    display: block;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

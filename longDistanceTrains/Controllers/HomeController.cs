@@ -56,9 +56,9 @@ public class HomeController : Controller
             ViewBag.Error = "Маршрут не найден";
             return View("Index");
         }
-
+        
         var schedules = _db.schedules
-            .Where(s => s.routFK == route.routeID)
+            .Where(s => s.routFK == route.routeID && s.timeDeparture.Date == date.Date)
             .ToList();
 
         var routeVM = new RouteVM()
@@ -68,6 +68,9 @@ public class HomeController : Controller
 
         var routeVMJson = JsonConvert.SerializeObject(routeVM);
         HttpContext.Session.SetString("RouteVM", routeVMJson);
+
+        var selectedDateJson = JsonConvert.SerializeObject(date);
+        HttpContext.Session.SetString("SelectedDate", selectedDateJson);
 
         return RedirectToAction("Index", "Schedule");
     }
