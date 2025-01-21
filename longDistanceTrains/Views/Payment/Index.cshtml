@@ -1,31 +1,47 @@
 <link rel="stylesheet" href="~/css/payment.css" asp-append-version="true"/>
+
+@{
+    var ticketDetails = ViewBag.TicketDetails as dynamic;
+    int adults = ticketDetails.Adults.ToObject<int>();
+    int children = ticketDetails.Children.ToObject<int>();
+    decimal price = ticketDetails.Price.ToObject<decimal>();
+    string wagonType = ticketDetails.WagonType.ToObject<string>();
+    decimal totalPrice = ticketDetails.TotalPrice.ToObject<decimal>();
+}
+
 <div class="hero">
     <div class="items">
-        <!-- Чек -->
         <div class="receipt">
             <h2>Ваш заказ</h2>
-            <div class="item">
-                <span>Купе</span>
-                <span>Взрослый</span>
-                <span class="total">6000 <p class="valute">р.</p> </span>
-            </div>
-            <div class="item">
-                <span>Купе</span>
-                <span>Взрослый</span>
-                <span class="total">6000 <p class="valute">р.</p> </span>
-            </div>
-            <div class="item">
-                <span>Купе</span>
-                <span>Детский</span>
-                <span class="total">5400 <p class="valute">р.</p> </span>
-            </div>
+            
+            @for (int i = 0; i < adults; i++)
+            {
+                <div class="item">
+                    <span>@ticketDetails.WagonType</span>
+                    <span>Взрослый</span>
+                    <span class="total">@ticketDetails.Price <p class="valute">р.</p></span>
+                </div>
+            }
+            
+            @for (int i = 0; i < children; i++)
+            {
+                <div class="item">
+                    <span>@ticketDetails.WagonType</span>
+                    <span>Детский</span>
+                    <span class="total">@(ticketDetails.Price * 0.85m) <p class="valute">р.</p></span>
+                </div>
+            }
+
             <hr>
             <div class="receipt-total">
                 <span>Итоговая сумма:</span>
-                <span>17400 <p class="valute">р.</p> </span>
+                <span>@ticketDetails.TotalPrice <p class="valute">р.</p></span>
             </div>
         </div>
 
+        
+        
+        
         <!-- Форма оплаты -->
         <form class="payment-form">
             <div>

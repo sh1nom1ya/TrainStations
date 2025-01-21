@@ -12,7 +12,9 @@ else
             <div class="inputTT">
                 <input type="text" id="routeIn" class="routeIn" name="routeIn" placeholder="Москва - Санкт-Петербург"
                        value="@Model.RouteTitle" readonly>
-                <a asp-controller="Home" asp-action="Index" class="routeBut">Изменить</a>
+                <a asp-controller="Home" asp-action="Index">
+                    <button  class="routeBut">Изменить</button>
+                </a>
             </div>
         </div>
         @if (Model.Schedules != null && Model.Schedules.Any())

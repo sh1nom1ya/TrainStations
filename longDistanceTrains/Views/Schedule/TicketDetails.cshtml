@@ -1,4 +1,9 @@
+@{
+    ViewBag.Title = "Детали билета";
+}
+
 <link rel="stylesheet" href="~/css/ticketDetails.css" asp-append-version="true"/>
+
 <div class="hero">
     <div class="passenger-section">
         <h2>Укажите количество пассажиров</h2>
@@ -7,18 +12,18 @@
                 <span>Взрослые</span>
                 <p>Старше 10 лет</p>
                 <div class="controls">
-                    <button class="decrement" data-target="adults">-</button>
+                    <button type="button" class="decrement" data-target="adults">-</button>
                     <span id="adult-count">1</span>
-                    <button class="increment" data-target="adults">+</button>
+                    <button type="button" class="increment" data-target="adults">+</button>
                 </div>
             </div>
             <div class="counter-item">
                 <span>Дети</span>
                 <p>Младше 10 лет</p>
                 <div class="controls">
-                    <button class="decrement" data-target="children">-</button>
+                    <button type="button" class="decrement" data-target="children">-</button>
                     <span id="child-count">0</span>
-                    <button class="increment" data-target="children">+</button>
+                    <button type="button" class="increment" data-target="children">+</button>
                 </div>
             </div>
         </div>
@@ -33,71 +38,53 @@
         </div>
     </div>
     <div class="confirmation-section">
-        <button id="confirm-selection">Подтвердить выбор</button>
+        <form asp-controller="Schedule" asp-action="SaveSelection" method="post">
+            <input type="hidden" id="adults-input" name="Adults" value="1" />
+            <input type="hidden" id="children-input" name="Children" value="0" />
+            <input type="hidden" id="wagon-type-input" name="WagonType" />
+            <input type="hidden" id="price-input" name="Price" />
+            <button type="submit" id="confirm-selection">Подтвердить выбор</button>
+        </form>
     </div>
-</div>  
+</div>
 
 <script>
+    // Обработка изменения количества пассажиров
     const adultCount = document.getElementById('adult-count');
     const childCount = document.getElementById('child-count');
-    const buttons = document.querySelectorAll('button');
+    const adultsInput = document.getElementById('adults-input');
+    const childrenInput = document.getElementById('children-input');
 
-    buttons.forEach((button) => {
+    document.querySelectorAll('button[data-target]').forEach((button) => {
         button.addEventListener('click', () => {
             const target = button.dataset.target;
             const isIncrement = button.classList.contains('increment');
             const countElement = target === 'adults' ? adultCount : childCount;
+            const inputElement = target === 'adults' ? adultsInput : childrenInput;
             let currentCount = parseInt(countElement.textContent);
 
             currentCount += isIncrement ? 1 : -1;
 
             if (currentCount < 0) currentCount = 0;
-            if (currentCount > 10) currentCount = 10; 
+            if (currentCount > 10) currentCount = 10;
 
             countElement.textContent = currentCount;
+            inputElement.value = currentCount;
         });
     });
 
+    // Обработка выбора вагона
     const compartments = document.querySelectorAll('.compartment');
+    const wagonTypeInput = document.getElementById('wagon-type-input');
+    const priceInput = document.getElementById('price-input');
 
     compartments.forEach((compartment) => {
         compartment.addEventListener('click', () => {
             compartments.forEach((c) => c.classList.remove('active'));
             compartment.classList.add('active');
+
+            wagonTypeInput.value = compartment.dataset.name;
+            priceInput.value = compartment.dataset.price;
         });
     });
-
-
-    document.getElementById('confirm-selection').addEventListener('click', () => {
-        const adults = parseInt(document.getElementById('adult-count').textContent);
-        const children = parseInt(document.getElementById('child-count').textContent);
-        const activeCompartment = document.querySelector('.compartment.active');
-
-        if (!activeCompartment) {
-            alert('Пожалуйста, выберите вагон.');
-            return;
-        }
-
-        const compartment = activeCompartment.dataset.name;
-
-        fetch('/api/SaveBookingDetails', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                Adults: adults,
-                Children: children,
-                Compartment: compartment
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-            })
-            .catch(error => {
-                console.error('Ошибка при сохранении данных:', error);
-                alert('Произошла ошибка при сохранении данных.');
-            });
-    });
-
-
 </script>

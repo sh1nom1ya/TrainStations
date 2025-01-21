@@ -331,7 +331,7 @@ select:focus {
 .modal-content {
     margin: auto;
     display: block;
-    max-width: 90%;
+    max-width: 50%;
     max-height: 90%;
     position: absolute;
     top: 50%;

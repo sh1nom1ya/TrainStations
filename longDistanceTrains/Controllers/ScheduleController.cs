@@ -43,6 +43,7 @@ public class ScheduleController : Controller
 
         var schedules = _db.schedules
             .Where(s => s.routFK == route.routeID && s.timeDeparture.Date == selectedDate.Date)
+            .OrderBy(s => s.timeDeparture)
             .ToList();
 
         DateTime endDate = DateTime.Now;
@@ -99,6 +100,34 @@ public class ScheduleController : Controller
         ViewBag.WagonPrices = wagonPrices;
 
         return View();
+    }
+    
+    [HttpPost]
+    public IActionResult SaveSelection(int Adults, int Children, string WagonType, decimal Price)
+    {
+        if (Adults < 1 || Adults > 10 || Children < 0 || Children > 10 || string.IsNullOrEmpty(WagonType) || Price <= 0)
+        {
+            return BadRequest("Некорректные данные.");
+        }
+        
+        decimal adultPrice = Price * Adults;
+        decimal childPrice = Price * Children * 0.85m; 
+        decimal totalPrice = adultPrice + childPrice;
+        
+        var ticketDetails = new
+        {
+            Adults,
+            Children,
+            WagonType,
+            Price,
+            AdultPrice = adultPrice,
+            ChildPrice = childPrice,
+            TotalPrice = totalPrice
+        };
+
+        HttpContext.Session.SetString("TicketDetails", JsonConvert.SerializeObject(ticketDetails));
+        
+        return RedirectToAction("Index", "Payment");
     }
 
     private double CalculateWagonPrice(double basePrice, string markupRate)
