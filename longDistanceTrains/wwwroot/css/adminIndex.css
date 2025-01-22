@@ -1,0 +1,53 @@
+.wrapper{
+    background: #000;
+}
+
+.hero {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline: 20em;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.verh {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 1em;
+}
+
+.funcAdm {
+    background: linear-gradient(135deg, rgba(3, 3, 3, 0.5), rgba(3, 3, 3, 0.1));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 5em 2em 5em 2em;
+    text-align: center;
+    border-radius: 8px;
+    flex: 1;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 340px;
+}
+
+.dlin{
+    width: 1040px;
+}
+
+.funcAdm:hover {
+    transform: scale(1.05);
+    background-color: #444;
+}
+
+.funcAdm:active {
+    background-color: #ff4747;
+}
