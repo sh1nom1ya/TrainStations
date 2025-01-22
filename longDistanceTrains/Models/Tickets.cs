@@ -15,9 +15,16 @@ public class Tickets
     
     [Required]
     public DateTime timeProcessing { get; set; }
-    
+
     [Required]
-    public int routFK { get; set; }
+    public string wagonType { get; set; }
+    
+    public int adults { get; set; }
+    
+    public int children { get; set; }
+
+    [Required]
+    public int routeFK { get; set; }
     [ForeignKey("routeFK")]
     public virtual Routes Route { get; set; }
     

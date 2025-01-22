@@ -1,7 +1,12 @@
+@model List<longDistanceTrains.Models.ViewModels.TicketUserVM>
+
 <link rel="stylesheet" href="~/css/ticketsBrowse.css" asp-append-version="true"/>
+
 <div class="hero">
     <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
+        <a asp-action="Index">
+            <img src="~/images/close.png" class="close" alt="">
+        </a>
     </li>
     <div class="routeSelect">
         <div class="inputTT">
@@ -9,61 +14,40 @@
             <button class="routeBut">Найти</button>
         </div>
     </div>
-    <div class="tickets">
-        <div class="lines">
-            <div class="string">
-                <div class="userInfo hlString">
-                    <p>Иванов Иван Иванович</p>
-                    <p>+7 (977) 777-77-77</p>
-                    <p>15000 <span>р.</span></p>
+    @foreach (var ticket in Model)
+    {
+        <div class="tickets">
+            <div class="lines">
+                <div class="string">
+                    <div class="userInfo hlString">
+                        <p>@ticket.Username</p>
+                        <p>@ticket.Phone</p>
+                        <p>@ticket.Ticket.price <span>р.</span></p>
+                    </div>
+                    <div class="ticketInfo hlString">
+                        <p>Взрослые: </p>
+                        <p>@ticket.Ticket.wagonType</p>
+                        <p>@ticket.Ticket.adults <span>шт.</span></p>
+                        <p>Дети: </p>
+                        <p>@ticket.Ticket.wagonType</p>
+                        <p>@ticket.Ticket.children <span>шт.</span></p>
+                    </div>
                 </div>
-                <div class="ticketInfo hlString">
-                    <p>Взрослые: </p>
-                    <p>Купе</p>
-                    <p>3 <span>шт.</span></p>
-                    <p>Дети: </p>
-                    <p>Купе</p>
-                    <p>1 <span>шт.</span></p>
-                </div>
-            </div>
-            <hr class="hrT">
-            <div class="knop">
-                <button class="delBut">Удалить</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="tickets">
-        <div class="lines">
-            <div class="string">
-                <div class="userInfo hlString">
-                    <p>Иванов Иван Иванович</p>
-                    <p>+7 (977) 777-77-77</p>
-                    <p>15000 <span>р.</span></p>
-                </div>
-                <div class="ticketInfo hlString">
-                    <p>Взрослые: </p>
-                    <p>Купе</p>
-                    <p>3 <span>шт.</span></p>
-                    <p>Дети: </p>
-                    <p>Купе</p>
-                    <p>1 <span>шт.</span></p>
-                </div>
-            </div>
-            <hr class="hrT">
-            <div class="knop">
-                <button class="delBut">Удалить</button>
+                <hr class="hrT">
+                <form asp-action="DeleteTicket" method="post" class="knop">
+                    <input type="hidden" name="routeId" value="@ticket.Ticket.ticketID"/>
+                    <button class="delBut">Удалить</button>
+                </form>
             </div>
         </div>
-    </div>
+    }
     
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const phoneInput = document.getElementById("cityFrom");
-
-        // Функция для отображения ошибки
+        
         function showError(input, message) {
             let error = input.nextElementSibling;
             if (!error || !error.classList.contains("error-message")) {
@@ -73,25 +57,21 @@
             }
             error.textContent = message;
         }
-
-        // Функция для скрытия ошибки
+        
         function hideError(input) {
             const error = input.nextElementSibling;
             if (error && error.classList.contains("error-message")) {
                 error.remove();
             }
         }
-
-        // Функция для форматирования номера телефона
+        
         function formatPhoneNumber(value) {
-            // Убираем все, кроме цифр
+
             const cleaned = value.replace(/[^0-9]/g, "");
 
-            // Ограничиваем длину номера (11 цифр, включая +7)
             const maxDigits = 11;
             const trimmed = cleaned.slice(0, maxDigits);
 
-            // Форматируем номер по шаблону +7 (999) 123-45-67
             let formatted = "+7";
             if (trimmed.length > 1) {
                 formatted += ` (${trimmed.slice(1, 4)}`;
@@ -108,8 +88,7 @@
 
             return formatted;
         }
-
-        // Обработка ввода
+        
         phoneInput.addEventListener("input", function () {
             // Убираем все, кроме цифр
             let cleaned = this.value.replace(/[^0-9]/g, "");
@@ -147,7 +126,6 @@
             }
         });
 
-        // Инициализация поля с +7 при загрузке страницы
         phoneInput.value = "+7";
     });
 </script>

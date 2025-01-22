@@ -24,22 +24,4 @@ public class TrainDbContext : IdentityDbContext
     public DbSet<Trains> trains { get; set; }
     public DbSet<Wagons> wagons { get; set; }
     public DbSet<Layouts> layouts { get; set; }
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.Entity<Layouts>()
-            .HasKey(l => new { l.trainID, l.wagonID });
-
-        modelBuilder.Entity<Layouts>()
-            .HasOne(l => l.Train)
-            .WithMany()
-            .HasForeignKey(l => l.trainID);
-
-        modelBuilder.Entity<Layouts>()
-            .HasOne(l => l.Wagon)
-            .WithMany()
-            .HasForeignKey(l => l.wagonID);
-    }
 }
