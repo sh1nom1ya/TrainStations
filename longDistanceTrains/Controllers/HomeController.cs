@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using longDistanceTrains.Models;
 using longDistanceTrains.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using trains.Data;
 
@@ -21,6 +22,11 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        if (User.IsInRole("Admin"))
+        {
+            return RedirectToAction("Index", "Admin");
+        }
+        
         var routes = _db.routes.Select(r => r.title).ToList();
         
         if (routes == null || !routes.Any())
@@ -75,6 +81,7 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Schedule");
     }
     
+    [Authorize]
     public IActionResult MyTickets()
     {
         var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);

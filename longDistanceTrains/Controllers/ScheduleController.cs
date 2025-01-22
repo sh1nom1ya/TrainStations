@@ -1,4 +1,5 @@
 using longDistanceTrains.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using trains.Data;
@@ -81,6 +82,7 @@ public class ScheduleController : Controller
         return RedirectToAction("TicketDetails");
     }
 
+    [Authorize]
     public IActionResult TicketDetails()
     {
         var scheduleId = HttpContext.Session.GetInt32("SelectedScheduleId");
