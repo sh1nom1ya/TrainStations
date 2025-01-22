@@ -1,10 +1,20 @@
+@model List<trains.Models.Trains>
+
+@foreach (var train in Model)
+{
+    if (train.Layouts != null)
+    {
+        var sortedWagons = train.Layouts.OrderBy(l => l.serialNum).ToList();
+    }
+}
 <link rel="stylesheet" href="~/css/trainsBrowse.css" asp-append-version="true"/>
+
 <div class="hero">
     <li class="closeLi">
         <img src="~/images/close.png" class="close" alt="">
     </li>
     <h1>Составы</h1>
-    <div class="aboutWagon"> 
+    <div class="aboutWagon">
         <div class="abWa">
             <p>Плацкарт – </p>
             <img src="~/images/vagonEdit.png" class="wagon red" data-index="" alt="">
@@ -23,31 +33,55 @@
         </div>
     </div>
     <button class="addButTrain" id="add-train">Добавить состав</button>
-        <div class="train">
-            <div class="sostNum">
-                <p>Номер состава:</p>
-                <input type="text" id="train-number" class="train-number-input" placeholder="" disabled>
-                <button class="trainEditBut" id="add-train">Редактировать</button>
-                <button class="" id="add-train">Удалить</button>
-            </div>
-            <div class="trainSost"><!-- Локомотив -->
-                <img class="train-head" src="~/images/trainEdit.PNG" alt="Локомотив">
-
-                <!-- Вагончики -->
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="1" alt="Вагон 1">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="2" alt="Вагон 2">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="3" alt="Вагон 3">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="4" alt="Вагон 4">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="5" alt="Вагон 5">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="6" alt="Вагон 6">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="7" alt="Вагон 7">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="8" alt="Вагон 8">
-                <img src="~/images/vagonEdit.png" class="wagon" data-index="9" alt="Вагон 9">
-
-                <img class="train-head revers" src="~/images/trainEdit.PNG" alt="Локомотив">
-            </div>
-            
-            <hr>
+    @foreach (var train in Model)
+    {
+    <div class="train">
+        <div class="sostNum">
+            <p>Номер состава:</p>
+            <input type="text" id="train-number" class="train-number-input" placeholder=" @train.num" disabled>
+            <button class="trainEditBut" id="add-train">Редактировать</button>
+            <form asp-action="DeleteTrain" method="post">
+                <input type="hidden" name="trainId" value="@train.trainID" />
+                <button type="submit" id="add-train">Удалить</button>
+            </form>
         </div>
-        
+    <div class="trainSost">
+        <img class="train-head" src="~/images/trainEdit.PNG" alt="Локомотив">
+        @foreach (var layout in train.Layouts.OrderBy(l => l.serialNum))
+        {
+                    var wagonClass = "";
+                    var wagonType = layout.Wagon?.title;
+
+
+                    if (layout.serialNum % 5 == 0)
+                    {
+                        wagonClass = "green"; 
+                        wagonType = "Вагон-ресторан";
+                    }
+                    else
+                    {
+                        switch (wagonType) 
+                        {
+                            case "Плацкарт":
+                                wagonClass = "red";
+                                break;
+                            case "Купе":
+                                wagonClass = "yellow";
+                                break;
+                            case "СВ":
+                                wagonClass = "blue";
+                                break;
+                            case "Вагон-ресторан":
+                                wagonClass = "green";
+                                break;
+                        }
+                    }
+
+                    <img src="~/images/vagonEdit.png" class="wagon @wagonClass">
+                }
+                <img class="train-head revers" src="~/images/trainEdit.PNG" alt="Локомотив">
     </div>
+        <hr>
+    </div>
+    }
+</div>

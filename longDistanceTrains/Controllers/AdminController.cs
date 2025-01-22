@@ -1,3 +1,5 @@
+using longDistanceTrains.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using trains.Data;
 using trains.Models;
@@ -20,7 +22,7 @@ public class AdminController : Controller
         return View();
     }
     
-    public IActionResult TicketsBrowse()
+    public async Task<IActionResult> TicketsBrowse()
     {
         return View();
     }
@@ -31,15 +33,30 @@ public class AdminController : Controller
     }
     
     [HttpPost]
-    public IActionResult DeleteTicket()
+    public IActionResult DeleteTicket(int? ticketId)
     {
-        return View();
+        // var ticket = _db.tickets.Find(ticketId);
+        //
+        // if (ticket == null)
+        // {
+        //     return NotFound();
+        // }
+        //
+        // _db.routes.Remove(ticket);
+        // _db.SaveChanges();
+        
+        return RedirectToAction("TicketsBrowse");
     }
     
     
     public IActionResult TrainsBrowse()
     {
-        return View();
+        var trains = _db.trains
+            .Include(t => t.Layouts)
+            .ThenInclude(l => l.Wagon)
+            .ToList();
+
+        return View(trains);
     }
     
     public IActionResult TrainsRedaction()
@@ -48,9 +65,22 @@ public class AdminController : Controller
     }
     
     [HttpPost]
-    public IActionResult DeleteTrain()
+    public IActionResult DeleteTrain(int? trainID)
     {
-        return View();
+        var train = _db.trains
+            .Include(t => t.Layouts)
+            .FirstOrDefault(t => t.trainID == trainID);
+
+        if (train == null)
+        {
+            return NotFound();
+        }
+        
+        _db.layouts.RemoveRange(train.Layouts);
+        _db.trains.Remove(train);
+        _db.SaveChanges();
+
+        return RedirectToAction("TrainsBrowse"); 
     }
     
     
@@ -62,13 +92,24 @@ public class AdminController : Controller
     
     public IActionResult RoutesRedaction()
     {
+        
         return View();
     }
     
     [HttpPost]
-    public IActionResult DeleteRoute()
+    public IActionResult DeleteRoute(int? routeId)
     {
-        return View();
+        var route = _db.routes.Find(routeId);
+
+        if (route == null)
+        {
+            return NotFound();
+        }
+        
+        _db.routes.Remove(route);
+        _db.SaveChanges();
+        
+        return RedirectToAction("RoutesBrowse");
     }
     
     

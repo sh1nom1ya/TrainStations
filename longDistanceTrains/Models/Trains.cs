@@ -13,4 +13,6 @@ public class Trains
     public int scheduleFK { get; set; }
     [ForeignKey("scheduleFK")]
     public virtual Schedules Schedule { get; set; }
+    
+    public virtual ICollection<Layouts> Layouts { get; set; } = new List<Layouts>();
 }

@@ -94,7 +94,7 @@ public class HomeController : Controller
 
         foreach (var ticket in userTickets)
         {
-            var route = _db.routes.FirstOrDefault(r => r.routeID == ticket.routFK);
+            var route = _db.routes.FirstOrDefault(r => r.routeID == ticket.routeFK);
 
             if (route != null)
             {
