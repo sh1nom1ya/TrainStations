@@ -11,7 +11,7 @@ public class Tickets
     [Required]
     public double price { get; set; }
     
-    public string QR { get; set; }
+    public string QR { get; set; } = String.Empty;
     
     [Required]
     public DateTime timeProcessing { get; set; }

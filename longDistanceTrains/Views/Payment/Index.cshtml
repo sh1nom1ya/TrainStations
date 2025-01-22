@@ -9,7 +9,7 @@
     decimal totalPrice = ticketDetails.TotalPrice.ToObject<decimal>();
 }
 
-<div class="hero">
+<form class="hero">
     <div class="items">
         <div class="receipt">
             <h2>Ваш заказ</h2>
@@ -43,7 +43,7 @@
         
         
         <!-- Форма оплаты -->
-        <form class="payment-form">
+        <div class="payment-form">
             <div>
                 <label for="name">Имя владельца карты</label>
                 <input
@@ -104,7 +104,7 @@
 
                 </div>
             </div>
-            <button>Оплатить</button>
-        </form>
+            <button type="submit">Оплатить</button>
+        </div>
     </div>
-</div>
+</form>
