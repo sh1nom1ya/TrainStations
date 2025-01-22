@@ -14,7 +14,7 @@
     background: linear-gradient(123deg, rgba(27, 157, 23, 1) 0%, rgba(13, 78, 8, 1) 100%);
     border: none;
     font-size: 20px;
-    width: fit-content;
+    width: 10em;
     height: 2.5em;
     border-radius: 10px;
     cursor: pointer;
@@ -23,9 +23,7 @@
     transition: all 200ms ease;
     margin-bottom: 20px;
     align-self: flex-end;
-    margin-right: auto;
-    margin-left: 21em;
-    padding-inline: 10px;
+    margin-right: 10em;
 }
 
 .addRouteButton:hover {
@@ -59,11 +57,10 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    width: 50%;
 }
 
 .lineRoute {
-    width: 30%;
+    width: 60%;
     height: auto;
 }
 
@@ -95,7 +92,6 @@
 .stops {
     width: 100%;
     text-align: center;
-    display: flex;
 }
 
 .stops p {
@@ -116,11 +112,6 @@
     transition: all 200ms ease;
 }
 
-.stationP{
-    width: 53%;
-    margin-left: 45px;
-}
-
 .stops-input:focus {
     border: 1px solid rgba(255, 0, 0, 0.5);
     background: rgba(255, 255, 255, 0.2);
@@ -130,32 +121,22 @@
 .knop {
     display: flex;
     gap: 10px;
-    justify-content: center;
 }
 
-.delBut {
+.saveBut{
     background: linear-gradient(123deg, rgba(255, 77, 0, 1) 0%, rgba(164, 36, 13, 1) 100%);
     border: none;
     font-size: 20px;
-    width: 13.1em;
+    width: 224px;
     height: 2.5em;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: auto;
     color: #fff;
     font-weight: 600;
     transition: all 200ms ease;
 }
 
 .saveBut:hover {
-    filter: brightness(0.9);
-}
-
-.delBut {
-    background: linear-gradient(123deg, rgba(255, 3, 96, 1) 0%, rgba(244, 30, 51, 1) 52%, rgba(146, 4, 6, 1) 100%);
-}
-
-.delBut:hover {
     filter: brightness(0.9);
 }
 
@@ -171,37 +152,18 @@
     margin-right: 2px;
     width:fit-content;
     cursor: pointer;
-    margin-right: 13em;
 }
 
 .close{
     height: 20px;
     width: 20px;
     margin-left: auto;
-    margin-right: 14em;
+    margin-right: 13em;
     float: right;
 }
 
-
-.routeTitle{
-    width: 61.5%;
-    padding: 15px;
-    border-radius: 10px;
+.priceIn{
+    margin-left: auto;
     height: 50px;
-    border: none;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: auto;
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
-    border: 1px solid rgba(255, 255, 255, 0.18); /* Border matching the form */
-    color: #fff;
-    appearance: none;
-    margin-left: 0;
-    transition: all 200ms ease;
-}
-
-.routeTitle:focus {
-    outline: none; /* Убираем стандартное выделение */
-    border: 1px solid rgba(255, 0, 0, 0.5);
-    background: rgba(255, 255, 255, 0.2);
+    width: 224px;
 }

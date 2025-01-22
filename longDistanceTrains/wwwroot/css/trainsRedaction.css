@@ -1,0 +1,175 @@
+.wrapper {
+    background: #000;
+}
+
+.hero {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.train{
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.train-head {
+    width: 160px;
+    height: 80px;
+}
+
+.revers{
+    transform: scale(-1, 1)
+}
+
+/* По умолчанию черно-белые вагоны */
+.wagon {
+    width: 140px;
+    height: 80px;
+    filter: grayscale(100%); /* Черно-белый фильтр */
+    transition: filter 0.3s ease, background-color 0.3s ease; /* Плавный переход */
+    transform: scale(1); /* Без увеличения по умолчанию */
+}
+
+.wagon.restaurant {
+
+    filter: none; /* Убираем черно-белый фильтр */
+    cursor: not-allowed; /* Указатель запрещает действия */
+}
+
+.wagon.selected {
+    filter: grayscale(0%); /* Снимаем черно-белый эффект */
+    transform: scale(1.1); /* Немного увеличиваем */
+}
+
+.wagon[data-index]::after {
+    content: attr(data-index);
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Кнопки и select */
+.controls {
+    margin-top: 20px;
+    display: flex;
+    /*justify-content: space-between;*/
+    gap: 15px;
+    width: 95%;
+}
+
+.controls p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+button, select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Ховер эффекты */
+select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    color: #fff; /* Text color */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Border matching the form */
+    color: #fff;
+    appearance: none;
+    transition: all 200ms ease;
+}
+
+select:focus {
+    outline: none; /* Убираем стандартное выделение */
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+button{
+    background: linear-gradient(123deg, rgba(255,77,0,1) 0%, rgba(164,36,13,1) 100%);
+    border: none;
+    font-size: 24px;
+    width: 9em;
+    height: 2em;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    transition: all 200ms ease;
+}
+
+.addButTrain{
+    background: linear-gradient(123deg, rgba(255,3,96,1) 0%, rgba(244,30,51,1) 52%, rgba(146,4,6,1) 100%);
+    width: 35em;
+}
+
+button:hover {
+    filter: brightness(0.8); /* Затемнение кнопки при наведении */
+}
+
+.sostNum{
+    margin-top: 3em;
+    display: flex;
+    width: 33%;
+    margin-right: auto;
+    margin-left: 6em;
+    vertical-align: middle;
+}
+
+.sostNum p{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 19%;
+}
+
+.train-number-input {
+    font-size: 16px;
+    width: 90%;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    color: #fff; /* Text color */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Border matching the form */
+    color: #fff;
+    outline: none;
+    appearance: none;
+    transition: all 200ms ease;
+}
+
+.train-number-input:focus {
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.train-number-input:invalid {
+    border: 1px solid red;
+}
+
+.closeLi{
+    margin-left: auto;
+    width:fit-content;
+    cursor: pointer;
+    margin-right: 2em;
+}
+
+.close{
+    height: 20px;
+    width: 20px;
+    margin-left: auto;
+    float: right;
+}
