@@ -20,9 +20,12 @@
         </ul>
         <ul class="half right">
             <li class="vid">
-                <a asp-controller="Home" asp-action="MyTickets">
-                    Мои Билеты
-                </a>
+                @if (User.IsInRole("admin"))
+                {
+                    <a asp-controller="Home" asp-action="MyTickets">
+                        Мои Билеты
+                    </a>
+                }
             </li>
             <li class="vid">
                 @{

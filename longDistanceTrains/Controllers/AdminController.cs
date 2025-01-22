@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using trains.Data;
+using trains.Models;
 
 namespace longDistanceTrains.Controllers;
 
@@ -55,7 +56,8 @@ public class AdminController : Controller
     
     public IActionResult RoutesBrowse()
     {
-        return View();
+        IEnumerable<Routes> routes = _db.routes;
+        return View(routes);
     }
     
     public IActionResult RoutesRedaction()
