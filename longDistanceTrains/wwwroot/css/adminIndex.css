@@ -2,6 +2,10 @@
     background: #000;
 }
 
+a:hover{
+    color: #fff;
+}
+
 .hero {
     margin-top: 80px;
     display: flex;
