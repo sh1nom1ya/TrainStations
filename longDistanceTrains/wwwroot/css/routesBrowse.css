@@ -1,0 +1,177 @@
+.wrapper{
+    background: #000;
+}
+
+.hero {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.addRouteButton {
+    background: linear-gradient(123deg, rgba(27, 157, 23, 1) 0%, rgba(13, 78, 8, 1) 100%);
+    border: none;
+    font-size: 20px;
+    width: fit-content;
+    height: 2.5em;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    transition: all 200ms ease;
+    margin-bottom: 20px;
+    align-self: flex-end;
+    margin-right: auto;
+    margin-left: 10em;
+    padding-inline: 10px;
+}
+
+.addRouteButton:hover {
+    filter: brightness(0.9);
+}
+
+/* Tickets Section */
+.tickets {
+    width: 70%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lines {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 1280px;
+}
+
+.string {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.lineRoute {
+    width: 60%;
+    height: auto;
+}
+
+.stations {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.city-input {
+    width: 45%;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    transition: all 200ms ease;
+}
+
+.city-input:focus {
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stops {
+    width: 100%;
+    text-align: center;
+}
+
+.stops p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.stops-input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    transition: all 200ms ease;
+}
+
+.stops-input:focus {
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Buttons */
+.knop {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.delBut {
+    background: linear-gradient(123deg, rgba(255, 77, 0, 1) 0%, rgba(164, 36, 13, 1) 100%);
+    border: none;
+    font-size: 20px;
+    width: 10em;
+    height: 2.5em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: auto;
+    color: #fff;
+    font-weight: 600;
+    transition: all 200ms ease;
+}
+
+.saveBut:hover {
+    filter: brightness(0.9);
+}
+
+.delBut {
+    background: linear-gradient(123deg, rgba(255, 3, 96, 1) 0%, rgba(244, 30, 51, 1) 52%, rgba(146, 4, 6, 1) 100%);
+}
+
+.delBut:hover {
+    filter: brightness(0.9);
+}
+
+.hrT {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 10px 0;
+}
+
+.closeLi{
+    margin-left: auto;
+    margin-right: 2px;
+    width:fit-content;
+    cursor: pointer;
+    margin-right: 13em;
+}
+
+.close{
+    height: 20px;
+    width: 20px;
+    margin-left: auto;
+    margin-right: 2px;
+    float: right;
+}
