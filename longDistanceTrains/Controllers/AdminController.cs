@@ -19,19 +19,29 @@ public class AdminController : Controller
         return View();
     }
     
-    public IActionResult AllTickets()
+    public IActionResult TicketsBrowse()
+    {
+        return View();
+    }
+    
+    public IActionResult TicketsRedaction()
     {
         return View();
     }
     
     [HttpPost]
-    public IActionResult DeleteTickets()
+    public IActionResult DeleteTicket()
     {
         return View();
     }
     
-    //нету
-    public IActionResult AllTrains()
+    
+    public IActionResult TrainsBrowse()
+    {
+        return View();
+    }
+    
+    public IActionResult TrainsRedaction()
     {
         return View();
     }
@@ -42,17 +52,13 @@ public class AdminController : Controller
         return View();
     }
     
-    public IActionResult CreateTrain()
+    
+    public IActionResult RoutesBrowse()
     {
         return View();
     }
     
-    public IActionResult AllRoutes()
-    {
-        return View();
-    }
-    
-    public IActionResult CreateRoute()
+    public IActionResult RoutesRedaction()
     {
         return View();
     }
@@ -63,12 +69,13 @@ public class AdminController : Controller
         return View();
     }
     
-    public IActionResult AllSchedules()
+    
+    public IActionResult SchedulesBrowse()
     {
         return View();
     }
     
-    public IActionResult CreateSchedule()
+    public IActionResult SchedulesRedaction()
     {
         return View();
     }

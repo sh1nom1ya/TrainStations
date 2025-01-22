@@ -22,7 +22,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        if (User.IsInRole("Admin"))
+        if (User.IsInRole("admin"))
         {
             return RedirectToAction("Index", "Admin");
         }
