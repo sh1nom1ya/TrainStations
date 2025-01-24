@@ -19,6 +19,7 @@ public class TrainDbContext : IdentityDbContext
     
     public DbSet<Routes> routes { get; set; }
     public DbSet<Tickets> tickets { get; set; }
+    
     public DbSet<AppUser> users { get; set; }
     public DbSet<Schedules> schedules { get; set; }
     public DbSet<Trains> trains { get; set; }

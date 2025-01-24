@@ -1,24 +1,29 @@
 <link rel="stylesheet" href="~/css/routesRedaction.css" asp-append-version="true"/>
+
 <div class="hero">
     <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
+        <a asp-action="RoutesBrowse">
+            <img src="~/images/close.png" class="close" alt="">
+        </a>
     </li>
-    <h1>Радатирование маршрута</h1>
-    <div class="string">
-        <div class="lines">
-            <div class="stations">
-                <input class="city-input" type="text" placeholder="Город отправления">
-                <img class="lineRoute" src="~/images/Line2.png" alt="Маршрут">
-                <input class="city-input" type="text" placeholder="Город прибытия">
-            </div>
-            <div class="stops">
-                <p>Промежуточные остановки (через запятую):</p>
-                <input class="stops-input" type="text" placeholder="Введите остановки">
-            </div>
-            <div class="knop">
-                <input class="city-input priceIn" type="text" placeholder="Цена" disabled>
-                <button class="saveBut">Сохранить</button>
+    <h1>Добавить маршрут</h1>w
+    <form asp-action="SaveRoute" method="post">
+        <div class="string">
+            <div class="lines">
+                <div class="stations">
+                    <input class="form-control city-input" type="text" name="departureCity" placeholder="Город отправления" required>
+                    <img class="lineRoute" src="~/images/Line2.png" alt="Маршрут">
+                    <input class="form-control city-input" type="text" name="arrivalCity" placeholder="Город прибытия" required>
+                </div>
+                <div class="stops">
+                    <p>Промежуточные остановки (через запятую):</p>
+                    <input class="form-control stops-input" type="text" name="stops" placeholder="Введите остановки" required>
+                </div>
+                <div class="knop">
+                    <input class="form-control city-input priceIn" type="text" name="price" placeholder="Цена" required>
+                    <button type="submit" class="saveBut">Сохранить</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

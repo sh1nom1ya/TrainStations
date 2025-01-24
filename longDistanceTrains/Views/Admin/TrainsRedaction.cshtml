@@ -1,57 +1,61 @@
+@model longDistanceTrains.Models.ViewModels.TrainVM
+
 <link rel="stylesheet" href="~/css/trainsRedaction.css" asp-append-version="true"/>
+
 <div class="hero">
-    <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
-    </li>
-    <h1>Настройка состава</h1>
-    <div class="sostNum">
-        <p>Номер состава:</p>
-        <input type="text" id="train-number" class="train-number-input" placeholder="Введите номер состава (до 8 цифр)">
-    </div>
-    <div class="train">
-        <!-- Локомотив -->
-        <img class="train-head" src="~/images/trainEdit.PNG" alt="Локомотив">
-
-        <!-- Вагончики -->
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="1" alt="Вагон 1">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="2" alt="Вагон 2">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="3" alt="Вагон 3">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="4" alt="Вагон 4">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="5" alt="Вагон 5">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="6" alt="Вагон 6">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="7" alt="Вагон 7">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="8" alt="Вагон 8">
-        <img src="~/images/vagonEdit.png" class="wagon" data-index="9" alt="Вагон 9">
-
-        <img class="train-head revers" src="~/images/trainEdit.PNG" alt="Локомотив">
-    </div>
-
-    <div class="controls">
-        <p>Выберите вагон:</p>
-        <select id="wagon-select">
-            <option value="0">Не выбран</option>
-            <option value="1">Вагон 1</option>
-            <option value="2">Вагон 2</option>
-            <option value="3">Вагон 3</option>
-            <option value="4">Вагон 4</option>
-            <option value="5">Вагон 5</option>
-            <option value="6">Вагон 6</option>
-            <option value="7">Вагон 7</option>
-            <option value="8">Вагон 8</option>
-            <option value="9">Вагон 9</option>
-        </select>
-
-        <p>Тип вагона:</p>
-        <select id="type-select">
-            <option value="0">Не выбран</option>
-            <option value="-50">Плацкарт</option>
-            <option value="1">Купе</option>
-            <option value="60">СВ</option>
-            <option value="180">Вагон-ресторан</option>
-        </select>
-
-        <button id="apply-type">Применить</button>
-        <button class="addButTrain" id="add-train">Добавить состав</button>
-    </div>
-
-    </div>
+    <form method="post" enctype="multipart/form-data">
+        @if (@Model?.Train.trainID != 0)
+        {
+            <input asp-for="Train.trainID" hidden />
+        }
+        <li class="closeLi">
+            <img src="~/images/close.png" class="close" alt="">
+        </li>
+        <h1>Настройка состава</h1>
+        @* <div class="sostNum"> *@
+        @*     <p>Номер состава:</p> *@
+        @*     <input asp-for="Train.num" id="train-number" class="train-number-input" placeholder="Введите номер состава (до 8 цифр)"> *@
+        @* </div> *@
+        @* <div class="train"> *@
+        @*     <img class="train-head" src="~/images/trainEdit.PNG" alt="Локомотив"> *@
+        @* *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="1" alt="Вагон 1"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="2" alt="Вагон 2"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="3" alt="Вагон 3"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="4" alt="Вагон 4"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="5" alt="Вагон 5"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="6" alt="Вагон 6"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="7" alt="Вагон 7"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="8" alt="Вагон 8"> *@
+        @*     <img src="~/images/vagonEdit.png" class="wagon" data-index="9" alt="Вагон 9"> *@
+        @* *@
+        @*     <img class="train-head revers" src="~/images/trainEdit.PNG" alt="Локомотив"> *@
+        @* </div> *@
+        @* *@
+        @* <div class="controls"> *@
+        @*     <p>Выберите вагон:</p> *@
+        @*     <select id="wagon-select"> *@
+        @*         <option value="0">Не выбран</option> *@
+        @*         <option value="1">Вагон 1</option> *@
+        @*         <option value="2">Вагон 2</option> *@
+        @*         <option value="3">Вагон 3</option> *@
+        @*         <option value="4">Вагон 4</option> *@
+        @*         <option value="5">Вагон 5</option> *@
+        @*         <option value="6">Вагон 6</option> *@
+        @*         <option value="7">Вагон 7</option> *@
+        @*         <option value="8">Вагон 8</option> *@
+        @*         <option value="9">Вагон 9</option> *@
+        @*     </select> *@
+        @* *@
+        @*     <p>Тип вагона:</p> *@
+        @*     @if (Model.WagonsList != null && Model.WagonsList.Any()) *@
+        @*     { *@
+        @*         <select asp-for="Train.Layouts" asp-items="@Model.WagonsList" id="type-select"> *@
+        @*             <option disabled selected>Тип</option> *@
+        @*         </select> *@
+        @*     } *@
+        @*     <button id="apply-type">Применить</button> *@
+        @*     <button type="submit" class="addButTrain" id="add-train">Добавить состав</button> *@
+        @* </div> *@
+    </form>
+</div>

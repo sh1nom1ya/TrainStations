@@ -1,3 +1,4 @@
+@using longDistanceTrains.Models.ViewModels
 @model List<trains.Models.Trains>
 
 @foreach (var train in Model)
@@ -11,7 +12,9 @@
 
 <div class="hero">
     <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
+        <a asp-action="Index">
+            <img src="~/images/close.png" class="close" alt="">
+        </a>
     </li>
     <h1>Составы</h1>
     <div class="aboutWagon">
@@ -32,7 +35,9 @@
             <img src="~/images/vagonEdit.png" class="wagon green" data-index="" alt="">
         </div>
     </div>
-    <button class="addButTrain" id="add-train">Добавить состав</button>
+    <a asp-action="TrainsRedaction">
+        <button class="addButTrain" id="add-train">Добавить состав</button>
+    </a>
     @foreach (var train in Model)
     {
     <div class="train">
