@@ -1,5 +1,6 @@
 using trains.Data;
 using Microsoft.AspNetCore.Identity;
+using trains.Models;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

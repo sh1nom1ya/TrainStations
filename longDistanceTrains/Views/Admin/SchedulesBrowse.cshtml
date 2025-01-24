@@ -1,32 +1,51 @@
+@model longDistanceTrains.Models.ViewModels.SchedulesVM
+
 <link rel="stylesheet" href="~/css/schedulesBrowse.css" asp-append-version="true"/>
+
 <div class="hero">
     <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
+        <a asp-action="Index">
+            <img src="~/images/close.png" class="close" alt="">
+        </a>
     </li>
     <h1>Расписание</h1>
     <button class="addRouteButton">Добавить расписание</button>
     <div class="string">
         <div class="lines">
             <div class="stations">
-                <input class="city-input" type="text" placeholder="Город отправления" disabled>
+                <input class="city-input" type="text" placeholder="@Model.RouteTitle.Split('/')[0]" disabled>
                 <img class="lineRoute" src="~/images/Line2.png" alt="Маршрут">
-                <input class="city-input" type="text" placeholder="Город прибытия" disabled>
+                <input class="city-input" type="text" placeholder="@Model.RouteTitle.Split('/')[1]" disabled>
             </div>
             <hr>
-            <div class="stops">
-                <input class="stops-input" type="text" placeholder="Промежуточная остановка" disabled>
-                <input class="stops-input stationP" type="text" placeholder="Время прибытия" disabled>
-            </div>
-            <div class="stops">
-                <input class="stops-input" type="text" placeholder="Промежуточная остановка" disabled>
-                <input class="stops-input stationP" type="text" placeholder="Время прибытия" disabled>
-            </div>
-            <div class="stops">
-                <input class="stops-input" type="text" placeholder="Промежуточная остановка" disabled>
-                <input class="stops-input stationP" type="text" placeholder="Время прибытия" disabled>
-            </div>
+            @if (Model.Stops != null && Model.Stops.Any())
+            {
+                foreach (var stop in Model.Stops)
+                {
+                    <div class="stops">
+                        <input class="stops-input" type="text" value="@stop.nameStop" disabled>
+                        <input class="stops-input stationP" type="text" value="@stop.timeStop" disabled>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Нет данных об остановках.</p>
+            }
             <div class="knop">
-                <select class="routeTitle" name="route-title" id=""></select>
+                <select class="routeTitle" name="route-title" id="" disabled="">
+                    @if (Model.Trains != null && Model.Trains.Any())
+                    {
+                        foreach (var train in Model.Trains)
+                        {
+                            <option value="@train.TrainNumber">@train.TrainNumber</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">Нет доступных поездов</option>
+                    }
+                </select>
                 <button class="delBut">Удалить</button>
             </div>
         </div>

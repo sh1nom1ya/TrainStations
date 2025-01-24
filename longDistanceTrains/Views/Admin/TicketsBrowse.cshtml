@@ -1,6 +1,6 @@
 @model List<longDistanceTrains.Models.ViewModels.TicketUserVM>
 
-<link rel="stylesheet" href="~/css/ticketsBrowse.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/ticketsBrowse.css" asp-append-version="true" />
 
 <div class="hero">
     <li class="closeLi">
@@ -14,40 +14,47 @@
             <button class="routeBut">Найти</button>
         </div>
     </div>
-    @foreach (var ticket in Model)
+
+    @if (Model == null || !Model.Any())
     {
-        <div class="tickets">
-            <div class="lines">
-                <div class="string">
-                    <div class="userInfo hlString">
-                        <p>@ticket.Username</p>
-                        <p>@ticket.Phone</p>
-                        <p>@ticket.Ticket.price <span>р.</span></p>
-                    </div>
-                    <div class="ticketInfo hlString">
-                        <p>Взрослые: </p>
-                        <p>@ticket.Ticket.wagonType</p>
-                        <p>@ticket.Ticket.adults <span>шт.</span></p>
-                        <p>Дети: </p>
-                        <p>@ticket.Ticket.wagonType</p>
-                        <p>@ticket.Ticket.children <span>шт.</span></p>
-                    </div>
-                </div>
-                <hr class="hrT">
-                <form asp-action="DeleteTicket" method="post" class="knop">
-                    <input type="hidden" name="routeId" value="@ticket.Ticket.ticketID"/>
-                    <button class="delBut">Удалить</button>
-                </form>
-            </div>
-        </div>
+        <p>Нет доступных билетов.</p>
     }
-    
+    else
+    {
+        <ul class="tickets">
+            @foreach (var ticketUser in Model)
+            {
+                <li class="ticket">
+                    <div class="lines">
+                        <div class="string">
+                            <div class="userInfo hlString">
+                                <p>@ticketUser.Fullname</p>
+                                <p>@ticketUser.Phone</p>
+                                <p>@ticketUser.Ticket.price.ToString("N0") <span>р.</span></p>
+                            </div>
+                            <div class="ticketInfo hlString">
+                                <p>Взрослые: @ticketUser.Ticket.adults <span>шт.</span></p>
+                                <p>Дети: @ticketUser.Ticket.children <span>шт.</span></p>
+                                <p>Тип вагона: @ticketUser.Ticket.wagonType</p>
+                            </div>
+                        </div>
+                        <hr class="hrT">
+                        <form asp-action="DeleteTicket" method="post" class="knop">
+                            <input type="hidden" name="id" value="@ticketUser.Ticket.ticketID" />
+                            <button class="delBut">Удалить</button>
+                        </form>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
 </div>
 
 <script>
+    // Скрипт для форматирования номера телефона
     document.addEventListener("DOMContentLoaded", function () {
         const phoneInput = document.getElementById("cityFrom");
-        
+
         function showError(input, message) {
             let error = input.nextElementSibling;
             if (!error || !error.classList.contains("error-message")) {
@@ -57,18 +64,16 @@
             }
             error.textContent = message;
         }
-        
+
         function hideError(input) {
             const error = input.nextElementSibling;
             if (error && error.classList.contains("error-message")) {
                 error.remove();
             }
         }
-        
+
         function formatPhoneNumber(value) {
-
             const cleaned = value.replace(/[^0-9]/g, "");
-
             const maxDigits = 11;
             const trimmed = cleaned.slice(0, maxDigits);
 
@@ -88,29 +93,19 @@
 
             return formatted;
         }
-        
+
         phoneInput.addEventListener("input", function () {
-            // Убираем все, кроме цифр
             let cleaned = this.value.replace(/[^0-9]/g, "");
-
-            // Добавляем +7 в начало, если его нет
             if (!cleaned.startsWith("7")) {
-                cleaned = "7" + cleaned.replace("7", ""); // Убедимся, что начинается с 7
+                cleaned = "7" + cleaned.replace("7", "");
             }
-
-            // Ограничиваем длину номера (11 цифр, включая +7)
             const maxDigits = 11;
             cleaned = cleaned.slice(0, maxDigits);
-
-            // Форматируем номер телефона
             this.value = formatPhoneNumber(cleaned);
-
-            hideError(this); // Убираем ошибку при исправлении
+            hideError(this);
         });
 
-        // Проверка при потере фокуса
         phoneInput.addEventListener("blur", function () {
-            // Проверяем, что номер телефона соответствует формату
             if (!/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(this.value)) {
                 showError(this, "Введите номер телефона в формате: +7 (999) 123-45-67.");
             } else {
@@ -118,9 +113,7 @@
             }
         });
 
-        // Ограничение ввода только цифр
         phoneInput.addEventListener("keydown", function (e) {
-            // Разрешаем: цифры, Backspace, Delete, стрелки
             if (!/\d/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete" && !e.key.startsWith("Arrow")) {
                 e.preventDefault();
             }

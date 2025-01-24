@@ -1,34 +1,100 @@
-<link rel="stylesheet" href="~/css/schedulesRedaction.css" asp-append-version="true"/>
+@*@model CreateScheduleVM
+
+@{
+    ViewData["Title"] = "Редактирование расписания";
+}
+
+<link rel="stylesheet" href="~/css/schedulesRedaction.css" asp-append-version="true" />
+
 <div class="hero">
     <li class="closeLi">
-        <img src="~/images/close.png" class="close" alt="">
+        <a asp-action="Index">
+            <img src="~/images/close.png" class="close" alt="Закрыть">
+        </a>
     </li>
-    <h1>Радатирование расписания</h1>
+    <h1>Редактирование расписания</h1>
     <div class="route">
-                
         <div class="stations">
+            <!-- Город отправления и прибытия -->
             <div class="fromTo">
-                <input class="city-input" type="text" placeholder="Город отправления" disabled>
+                <input class="city-input" type="text" value="@Model.RouteTitle.Split('/')[0]" disabled>
                 <img class="lineRoute" src="~/images/Line2.png" alt="Маршрут">
-                <input class="city-input" type="text" placeholder="Город прибытия" disabled>
+                <input class="city-input" type="text" value="@Model.RouteTitle.Split('/')[1]" disabled>
             </div>
-            <div class="station">
-                <span class="station-name">Москва</span>
-                <input class="time-input" type="time" placeholder="Введите время">
-            </div>
-            <div class="station">
-                <span class="station-name">Тверь</span>
-                <input class="time-input" type="time" placeholder="Введите время">
-            </div>
-            <div class="station">
-                <span class="station-name">Санкт-Петербург</span>
-                <input class="time-input" type="time" placeholder="Введите время">
-            </div> 
+
+            <!-- Список остановок -->
+            @if (Model.Stops != null && Model.Stops.Any())
+            {
+                foreach (var stop in Model.Stops)
+                {
+                    <div class="station">
+                        <input class="station-name" type="text" value="@stop.nameStop">
+                        <input class="time-input" type="time" value="@stop.timeStop">
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Нет данных об остановках.</p>
+            }
+
+            <!-- Выбор поезда и кнопка сохранения -->
             <div class="chuchuka">
-                <select class="routeTitle" name="route-title" id=""></select>
-                <button class="saveSchel" id="">Сохранить</button>
-            </div>          
-                       
+                <select class="routeTitle" name="route-title" id="trainSelect">
+                    @if (Model.Trains != null && Model.Trains.Any())
+                    {
+                        foreach (var train in Model.Trains)
+                        {
+                            <option value="@train.TrainNumber">@train.TrainNumber</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">Нет доступных поездов</option>
+                    }
+                </select>
+                <button class="saveSchel" id="saveSchedule">Сохранить</button>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.getElementById('saveSchedule').addEventListener('click', function () {
+            const stops = [];
+            document.querySelectorAll('.station').forEach(station => {
+                const name = station.querySelector('.station-name').value;
+                const time = station.querySelector('.time-input').value;
+                stops.push({ nameStop: name, timeStop: time });
+            });
+
+            const trainNumber = document.getElementById('trainSelect').value;
+
+            const data = {
+                ScheduleId: @Model.ScheduleID, // Убедитесь, что ScheduleId есть в вашей модели
+                RouteTitle: '@Model.RouteTitle',
+                Stops: stops,
+                TrainNumber: trainNumber
+            };
+
+            fetch('/Admin/SaveSchedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/Admin/SchedulesBrowse';
+                } else {
+                    console.error('Ошибка при сохранении данных');
+                }
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+            });
+        });
+    </script>
+}*@
